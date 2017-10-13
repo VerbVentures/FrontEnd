@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "709801863123",
+    "project_id": "firebase-verbventures"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709801863123:android:bbebc692e1720d48",
+        "android_client_info": {
+          "package_name": "verbventures.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709801863123-7jgudqvs7205lgf09u5agequvehila5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "verbventures.frontend",
+            "certificate_hash": "cfa8f36f4181c0e05b99fb99a855f48684c0ab13"
+          }
+        },
+        {
+          "client_id": "709801863123-9vrpdbtjm2eajhtsrq1rbq4ciksanvvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW73UWC2tKEn3nWbPKCjoU844yT20Qti4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
