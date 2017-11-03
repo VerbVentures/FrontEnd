@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "709801863123",
-    "project_id": "firebase-verbventures"
+    "firebase_url": "https://fir-verbventures.firebaseio.com",
+    "project_id": "firebase-verbventures",
+    "storage_bucket": "firebase-verbventures.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,10 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "709801863123-f4sv3oktisllh03e98ecohk9s0tm15ku.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "709801863123-7jgudqvs7205lgf09u5agequvehila5j.apps.googleusercontent.com",
           "client_type": 1,
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709801863123-f4sv3oktisllh03e98ecohk9s0tm15ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -70,4 +70,14 @@
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
 
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- Facebook Account Kit Info -->
+    <string name="FACEBOOK_APP_ID">123897911642752</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">4461db530a8cb00e996eb103d957d583</string>
+    <string name="ak_login_protocol_scheme">ak123897911642752</string>
+
+    <!-- Random Useful -->
+    <string name="email_phone_hint">Enter Email Address or Phone Number</string>
+
+
 </resources>

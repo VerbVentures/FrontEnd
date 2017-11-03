@@ -6,7 +6,7 @@
     android:background="@color/blue_grey_700"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,6 +24,24 @@
             android:text="@string/title_text"
             android:textColor="@android:color/white"
             android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="428dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:onClick="LoginOnClick"
+            android:text="Login"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/createAccountButton"
+            android:layout_width="432dp"
+            android:layout_height="wrap_content"
+            android:onClick="CreateAccountOnClick"
+            android:text="Create Account"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 
@@ -46,6 +64,7 @@
             tools:visibility="visible">
 
         </LinearLayout>
+
 
     </RelativeLayout>
 
