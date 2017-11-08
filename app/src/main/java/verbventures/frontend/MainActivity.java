@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.FacebookSdk;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("resultCode", resultCode);
         intent.putExtra("data", data);
         startActivityForResult(intent, 1);
+
 
     }
 }

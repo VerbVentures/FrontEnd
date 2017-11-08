@@ -8,24 +8,4 @@
     tools:context="verbventures.frontend.MainScreen"
     tools:showIn="@layout/activity_main_screen">
 
-    <TextView
-        android:id="@+id/requestText"
-        android:layout_width="184dp"
-        android:layout_height="69dp"
-        tools:layout_editor_absoluteX="358dp"
-        tools:layout_editor_absoluteY="29dp" />
-
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="178dp"
-        android:layout_height="80dp"
-        tools:layout_editor_absoluteX="361dp"
-        tools:layout_editor_absoluteY="120dp" />
-
-    <TextView
-        android:id="@+id/dataText"
-        android:layout_width="181dp"
-        android:layout_height="73dp"
-        tools:layout_editor_absoluteX="360dp"
-        tools:layout_editor_absoluteY="236dp" />
 </android.support.constraint.ConstraintLayout>
