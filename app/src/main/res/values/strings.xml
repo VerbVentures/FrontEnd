@@ -78,6 +78,7 @@
 
     <!-- Random Useful -->
     <string name="email_phone_hint">Enter Email Address or Phone Number</string>
+    <string name="title_activity_main_screen">MainScreen</string>
 
 
 </resources>

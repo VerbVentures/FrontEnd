@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity implements
         return googlePlayServicesAvailable == ConnectionResult.SUCCESS;
     }
     private Button createAccountButton;
-    private Button loginButton;
 
     AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder;
     UIManager uiManager = new SkinManager(SkinManager.Skin.CONTEMPORARY, 0);
@@ -93,9 +92,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         createAccountButton = this.findViewById(R.id.createAccountButton);
-        loginButton = this.findViewById(R.id.loginButton);
         emailLogin(createAccountButton);
     }
 
@@ -149,6 +146,8 @@ public class LoginActivity extends AppCompatActivity implements
                     Toast.LENGTH_LONG)
                     .show();
         }
+        setResult(RESULT_OK, data);
+        finish();
     }
 
 
