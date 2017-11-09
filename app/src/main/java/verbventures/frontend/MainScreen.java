@@ -29,15 +29,6 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
-        TextView requestText = this.findViewById(R.id.requestText);
-        TextView resultText = this.findViewById(R.id.resultText);
-        TextView dataText = this.findViewById(R.id.dataText);
-
-        requestText.setText(getIntent().getStringExtra("requestCode"));
-        resultText.setText(getIntent().getStringExtra("resultCode"));
-        dataText.setText(getIntent().getStringExtra("data"));
-
-
 
     }
 

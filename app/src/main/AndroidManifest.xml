@@ -40,10 +40,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="LoginActivity"
-            android:theme="@style/Theme.AccountKit"> </activity>
-        <activity
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme.NoActionBar"> </activity>
@@ -70,11 +66,21 @@
         <activity android:name="com.facebook.accountkit.ui.AccountKitEmailRedirectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/ak_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CreateAdmin"
+            android:label="@string/title_activity_create_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginError"
+            android:label="@string/title_activity_login_error"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

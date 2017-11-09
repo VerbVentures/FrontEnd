@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="verbventures.frontend.MainScreen"
-    tools:showIn="@layout/activity_main_screen">
+    tools:context="verbventures.frontend.CreateAdmin"
+    tools:showIn="@layout/activity_create_admin">
 
 </android.support.constraint.ConstraintLayout>
