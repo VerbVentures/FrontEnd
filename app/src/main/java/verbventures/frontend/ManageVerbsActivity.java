@@ -11,12 +11,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainScreen extends AppCompatActivity {
+/**
+ * Created by Jacob on 11/8/2017.
+ */
+
+public class ManageVerbsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.activity_manage_verbs);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
 
@@ -36,9 +40,6 @@ public class MainScreen extends AppCompatActivity {
         requestText.setText(getIntent().getStringExtra("requestCode"));
         resultText.setText(getIntent().getStringExtra("resultCode"));
         dataText.setText(getIntent().getStringExtra("data"));
-
-
-
     }
 
     @Override
@@ -82,5 +83,4 @@ public class MainScreen extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

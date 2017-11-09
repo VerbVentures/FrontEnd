@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="verbventures.frontend.SessionReportsActivity"
+    tools:showIn="@layout/activity_session_reports">
+
+    <TextView
+        android:id="@+id/requestText"
+        android:layout_width="184dp"
+        android:layout_height="69dp"
+        tools:layout_editor_absoluteX="358dp"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="178dp"
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteX="361dp"
+        tools:layout_editor_absoluteY="120dp" />
+
+    <TextView
+        android:id="@+id/dataText"
+        android:layout_width="181dp"
+        android:layout_height="73dp"
+        tools:layout_editor_absoluteX="360dp"
+        tools:layout_editor_absoluteY="236dp" />
+</android.support.constraint.ConstraintLayout>

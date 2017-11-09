@@ -47,6 +47,26 @@
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme.NoActionBar"> </activity>
+        <activity
+            android:name=".ManageVerbsActivity"
+            android:label="ManageVerbs"
+            android:theme="@style/AppTheme.NoActionBar"> </activity>
+        <activity
+            android:name=".ManageVerbPacksActivity"
+            android:label="ManageVerbPacks"
+            android:theme="@style/AppTheme.NoActionBar"> </activity>
+        <activity
+            android:name=".SessionReportsActivity"
+            android:label="SessionReports"
+            android:theme="@style/AppTheme.NoActionBar"> </activity>
+        <activity
+            android:name=".CreateSessionActivity"
+            android:label="CreateSession"
+            android:theme="@style/AppTheme.NoActionBar"> </activity>
+        <activity
+            android:name=".ManageStudentsActivity"
+            android:label="ManageStudents"
+            android:theme="@style/AppTheme.NoActionBar"> </activity>
         <activity android:name="com.facebook.accountkit.ui.AccountKitEmailRedirectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
