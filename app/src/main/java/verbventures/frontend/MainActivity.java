@@ -44,9 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         getCurrentAccount();
+
     }
 
     private void getCurrentAccount(){
@@ -57,25 +56,38 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(final Account account) {
                     // Get Account Kit ID
-                    String accountKitId = account.getId();
+                    final String accountKitId = account.getId();
                     Log.e("Account Kit Id", accountKitId);
 
                     if(account.getEmail()!=null)
                         Log.e("Email",account.getEmail());
 
-                    String mUrlString = "http://10.0.2.2:8000/api/admins/" + accountKitId;
+                    String mUrlString = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com//api/admins/" + accountKitId;
                     Request request = new Request.Builder()
                         .url(mUrlString)
                         .build();
 
                     client.newCall(request).enqueue(new Callback() {
                         @Override public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "API Error", e);
+                            Intent intent = new Intent(MainActivity.this, LoginError.class);
+                            intent.putExtra("accountKitId", accountKitId);
+                            startActivity(intent);
                         }
 
                         @Override public void onResponse(Call call, Response response) throws IOException {
+                            if (response.code() == 404) {
+                                // Go to CreateAdmin Activity
+                                Log.d(TAG, "New Admin");
+                                Intent intent = new Intent(MainActivity.this, CreateAdmin.class);
+                                intent.putExtra("accountKitId", accountKitId);
+                                startActivity(intent);
+                            }
                             if (!response.isSuccessful()) {
-                                // TODO: handle new user
+                                Log.e(TAG, "API Error");
+                                Intent intent = new Intent(MainActivity.this, LoginError.class);
+                                intent.putExtra("accountKitId", accountKitId);
+                                startActivity(intent);
                             }
                             String responseString = response.body().string();
                             Log.d(TAG, responseString);
@@ -84,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                             Admin admin;
                             admin = gson.fromJson(responseString, Admin.class);
                             Log.d("Admin",admin.toString());
-
                             Intent intent = new Intent(MainActivity.this, MainScreen.class);
                             intent.putExtra("admin", admin);
                             startActivity(intent);
@@ -98,12 +109,14 @@ public class MainActivity extends AppCompatActivity {
                 public void onError(final AccountKitError error) {
                     // Handle Error
                     Log.e(TAG,error.toString());
-                    // TODO: Go to error screen
+                    Intent intent = new Intent(MainActivity.this, LoginError.class);
+                    startActivity(intent);
                 }
             });
-        } else {
-            //Logged Out User
-            Log.e(TAG,"Logged Out");
+        }
+        else {
+            Log.e(TAG,"Logged Out User");
+            emailLogin(null);
         }
     }
 
