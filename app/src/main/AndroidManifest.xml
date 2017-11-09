@@ -40,10 +40,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainScreen"
-            android:label="@string/title_activity_main_screen"
-            android:theme="@style/AppTheme.NoActionBar"> </activity>
-        <activity
             android:name=".ManageVerbsActivity"
             android:label="ManageVerbs"
             android:theme="@style/AppTheme.NoActionBar"> </activity>
