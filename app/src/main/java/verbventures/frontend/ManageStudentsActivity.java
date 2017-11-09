@@ -11,12 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainScreen extends AppCompatActivity {
+public class ManageStudentsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.activity_manage_students);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
 
@@ -28,6 +28,15 @@ public class MainScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        TextView requestText = this.findViewById(R.id.requestText);
+        TextView resultText = this.findViewById(R.id.resultText);
+        TextView dataText = this.findViewById(R.id.dataText);
+
+        requestText.setText(getIntent().getStringExtra("requestCode"));
+        resultText.setText(getIntent().getStringExtra("resultCode"));
+        dataText.setText(getIntent().getStringExtra("data"));
+
 
 
     }
@@ -72,6 +81,11 @@ public class MainScreen extends AppCompatActivity {
                 // invoke superclass to handle it
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 }
