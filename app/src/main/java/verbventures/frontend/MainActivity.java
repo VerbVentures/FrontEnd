@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             Admin admin;
                             admin = gson.fromJson(responseString, Admin.class);
                             Log.d("Admin",admin.toString());
-                            Intent intent = new Intent(MainActivity.this, MainScreen.class);
+                            Intent intent = new Intent(MainActivity.this, ManageStudentsActivity.class);
                             intent.putExtra("admin", admin);
                             startActivity(intent);
 
