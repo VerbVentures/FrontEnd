@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("accountKitId", accountKitId);
                                 startActivity(intent);
                             }
-                            if (!response.isSuccessful()) {
+                            else if (!response.isSuccessful()) {
                                 Log.e(TAG, "API Error");
                                 Intent intent = new Intent(MainActivity.this, LoginError.class);
                                 intent.putExtra("accountKitId", accountKitId);
