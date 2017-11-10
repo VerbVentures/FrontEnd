@@ -1,15 +1,31 @@
 package verbventures.frontend;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import verbventures.frontend.ModelClasses.Student;
+import verbventures.frontend.ModelClasses.Verb;
 
 public class ManageStudentsActivity extends AppCompatActivity {
 
@@ -20,6 +36,10 @@ public class ManageStudentsActivity extends AppCompatActivity {
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
 
+        final Context mcontext = this;
+
+        final String TAG = "debug";
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +49,41 @@ public class ManageStudentsActivity extends AppCompatActivity {
             }
         });
 
-        TextView requestText = this.findViewById(R.id.requestText);
-        TextView resultText = this.findViewById(R.id.resultText);
-        TextView dataText = this.findViewById(R.id.dataText);
+        // Grab the list view
+        final ListView listView = (ListView)   findViewById(R.id.student_list);
 
-        requestText.setText(getIntent().getStringExtra("requestCode"));
-        resultText.setText(getIntent().getStringExtra("resultCode"));
-        dataText.setText(getIntent().getStringExtra("data"));
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students")
+                .build();
+
+        // Call the client enqueue with a callback function
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG,"request unsuccessful");
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //convert to a list from JSON using Gson
+                Gson gson = new Gson();
+                final Student[] obtainedStudents = gson.fromJson(response.body().string(), Student[].class);
+
+                //in order to populate the list, we need to call the main UI thread again
+                ManageStudentsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        StudentArrayAdapter adapter = new StudentArrayAdapter(mcontext, obtainedStudents);
+                        // Attach the adapter to a ListView
+                        listView.setAdapter(adapter);
+                    }
+                });
+
+            }
+        });
+
 
 
 

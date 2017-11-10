@@ -20,19 +20,19 @@ public class VerbVentureUser implements Serializable {
     }
 
     public String getLastName() {
-        return firstName;
+        return lastName;
     }
 
-    public void setLastName(String firstName) {
-        this.firstName = firstName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUserId() {
-        return firstName;
+        return userId;
     }
 
-    public void setUserId(String firstName) {
-        this.firstName = firstName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }
