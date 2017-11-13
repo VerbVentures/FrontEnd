@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -28,6 +30,9 @@ import verbventures.frontend.ModelClasses.Student;
 import verbventures.frontend.ModelClasses.Verb;
 
 public class ManageStudentsActivity extends AppCompatActivity {
+
+    private ListView studentList;
+    private StudentArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         });
 
         // Grab the list view
-        final ListView listView = (ListView)   findViewById(R.id.student_list);
+        this.studentList = (ListView)   findViewById(R.id.student_list);
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -75,9 +80,9 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 ManageStudentsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        StudentArrayAdapter adapter = new StudentArrayAdapter(mcontext, obtainedStudents);
+                        adapter = new StudentArrayAdapter(mcontext, obtainedStudents);
                         // Attach the adapter to a ListView
-                        listView.setAdapter(adapter);
+                        studentList.setAdapter(adapter);
                     }
                 });
 
@@ -128,6 +133,17 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 // if we get here, the user's action wasn't recognized
                 // invoke superclass to handle it
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //on-Click methods
+    public void onStartSessionClick(View v){
+         ArrayList<View> studentsInSession = new ArrayList<View>();
+
+        for(int i=0; i < adapter.checked.length; i++){
+            if(adapter.checked[i] == true){
+                studentsInSession.add( adapter.getView(i, null, null));
+            }
         }
     }
 

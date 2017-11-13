@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import verbventures.frontend.ModelClasses.Student;
 
 public class StudentArrayAdapter extends ArrayAdapter<Student> {
     // View lookup cache
+    public boolean[] checked;
     private static class ViewHolder {
         TextView firstName;
         TextView lastName;
@@ -25,10 +27,11 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
 
     public StudentArrayAdapter(Context context, Student[] students) {
         super(context, R.layout.item_student, students);
+        checked = new boolean[students.length];
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Student student = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -50,7 +53,23 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         // into the template view.
         viewHolder.firstName.setText(student.getUser().getFirstName());
         viewHolder.lastName.setText(student.getUser().getLastName());
+        CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
         // Return the completed view to render on screen
+
+        cb.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(((CheckBox)v).isChecked())
+                {
+                    checked[position]=true;
+                }
+                else
+                {
+                    checked[position]=false;
+
+                }
+            }
+        });
         return convertView;
     }
 }
