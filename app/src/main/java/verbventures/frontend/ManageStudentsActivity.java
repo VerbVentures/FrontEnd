@@ -60,16 +60,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
         // Grab the list view
         this.studentList = (ListView)   findViewById(R.id.student_list);
 
-        /* OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-students/" + admin.getAccountKitId())
                 .build();
-        */
 
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students")
-                .build();
+
 
         // Call the client enqueue with a callback function
         client.newCall(request).enqueue(new Callback() {
