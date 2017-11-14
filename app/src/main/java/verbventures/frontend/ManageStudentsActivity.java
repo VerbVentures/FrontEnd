@@ -60,16 +60,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
         // Grab the list view
         this.studentList = (ListView)   findViewById(R.id.student_list);
 
-        /* OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-students/" + admin.getAccountKitId())
                 .build();
-        */
 
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students")
-                .build();
+
 
         // Call the client enqueue with a callback function
         client.newCall(request).enqueue(new Callback() {
@@ -121,21 +117,19 @@ public class ManageStudentsActivity extends AppCompatActivity {
 
             case R.id.action_manageverbpacks:
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
+                manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_createsession:
-                Intent createSession = new Intent(this, CreateSessionActivity.class);
-                startActivity(createSession);
                 return true;
 
             case R.id.action_sessionreports:
                 Intent sessionReports = new Intent(this, SessionReportsActivity.class);
+                sessionReports.putExtra("admin", admin);
                 startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:
                 Intent manageStudents = new Intent(this, ManageStudentsActivity.class);
+                manageStudents.putExtra("admin", admin);
                 startActivity(manageStudents);
                 return true;
 
@@ -155,6 +149,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 studentsInSession.add(adapter.getItem(i));
             }
         }
+    }
+
+    public void onCreateStudentClick(View v){
+        Intent intent = new Intent(ManageStudentsActivity.this, CreateStudent.class);
+        intent.putExtra("admin", admin);
+        startActivity(intent);
     }
 
     @Override

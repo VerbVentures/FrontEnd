@@ -6,32 +6,52 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="verbventures.frontend.ManageStudentsActivity"
+    tools:layout_editor_absoluteY="89dp"
     tools:showIn="@layout/activity_manage_students">
-
-    <ListView
-        android:id="@+id/student_list"
-        android:layout_width="440dp"
-        android:layout_height="759dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginTop="45dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/startSessionButton"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </ListView>
 
     <Button
         android:id="@+id/startSessionButton"
-        android:layout_width="87dp"
-        android:layout_height="105dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="45dp"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="137dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="8dp"
         android:onClick="onStartSessionClick"
         android:text="Start Session"
-        app:layout_constraintEnd_toStartOf="@+id/student_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toEndOf="@+id/createStudentButton"
+        app:layout_constraintTop_toBottomOf="@+id/student_list"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/createStudentButton"
+        android:layout_width="153dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onCreateStudentClick"
+        android:text="Add Student"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/student_list"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ListView
+        android:id="@+id/student_list"
+        android:layout_width="544dp"
+        android:layout_height="705dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:divider="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 </android.support.constraint.ConstraintLayout>

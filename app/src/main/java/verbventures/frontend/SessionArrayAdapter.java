@@ -1,6 +1,7 @@
 package verbventures.frontend;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class SessionArrayAdapter extends ArrayAdapter<Session> {
             // If there's no view to re-use, inflate a brand new view for row
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_verb, parent, false);
+            convertView = inflater.inflate(R.layout.item_session, parent, false);
             viewHolder.sessionId = (TextView) convertView.findViewById(R.id.tvSessionId);
             viewHolder.sessionDate = (TextView) convertView.findViewById(R.id.tvSessionDate);
 
@@ -47,8 +48,9 @@ public class SessionArrayAdapter extends ArrayAdapter<Session> {
         }
         // Populate the data from the data object via the viewHolder object
         // into the template view.
-        viewHolder.sessionId.setText(session.getSessionId());
+        Log.d("debug", "sessionId: " + session.getSessionId());
         viewHolder.sessionDate.setText(session.getSessionDt());
+        viewHolder.sessionId.setText(session.getSessionId());
 
         // Return the completed view to render on screen
         return convertView;
