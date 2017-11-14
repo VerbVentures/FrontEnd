@@ -24,6 +24,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import verbventures.frontend.ModelClasses.Admin;
 import verbventures.frontend.ModelClasses.Verb;
 
 /**
@@ -32,7 +33,7 @@ import verbventures.frontend.ModelClasses.Verb;
 
 public class ManageVerbsActivity extends AppCompatActivity {
 
-
+    private Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class ManageVerbsActivity extends AppCompatActivity {
         final String TAG = "debug";
 
         final Context mcontext = this;
+        admin = (Admin) getIntent().getSerializableExtra("admin");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +141,8 @@ public class ManageVerbsActivity extends AppCompatActivity {
 
     //on-Click methods
     public void onAddVerbClick(View v){
-
+        Intent addVerb = new Intent(this, AddVerb.class);
+        addVerb.putExtra("admin", admin);
+        startActivity(addVerb);
     }
 }

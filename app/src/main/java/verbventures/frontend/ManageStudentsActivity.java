@@ -34,6 +34,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
 
     private ListView studentList;
     private StudentArrayAdapter adapter;
+    private Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
 
         final Context mcontext = this;
-        final Admin admin = (Admin) getIntent().getSerializableExtra("admin");
+        admin = (Admin) getIntent().getSerializableExtra("admin");
 
         final String TAG = "debug";
 
@@ -114,6 +115,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_manageverbs:
                 Intent manageVerbs = new Intent(this, ManageVerbsActivity.class);
+                manageVerbs.putExtra("admin", admin);
                 startActivity(manageVerbs);
                 return true;
 
