@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <EditText
+        android:id="@+id/IDHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/tvFirstname"
         android:layout_width="134dp"
@@ -34,4 +43,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Include in Session" />
+
 </LinearLayout>

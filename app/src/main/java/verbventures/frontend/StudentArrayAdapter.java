@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
     private static class ViewHolder {
         TextView firstName;
         TextView lastName;
+        EditText IDHolder;
     }
 
     public StudentArrayAdapter(Context context, Student[] students) {
@@ -43,6 +45,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
             convertView = inflater.inflate(R.layout.item_student, parent, false);
             viewHolder.firstName = (TextView) convertView.findViewById(R.id.tvFirstname);
             viewHolder.lastName = (TextView) convertView.findViewById(R.id.tvLastname);
+            viewHolder.IDHolder = (EditText) convertView.findViewById(R.id.IDHolder);
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
         } else {
@@ -53,6 +56,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         // into the template view.
         viewHolder.firstName.setText(student.getUser().getFirstName());
         viewHolder.lastName.setText(student.getUser().getLastName());
+        viewHolder.IDHolder.setText(student.getUser().getUserId());
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
         // Return the completed view to render on screen
 

@@ -140,11 +140,13 @@ public class ManageStudentsActivity extends AppCompatActivity {
 
     //on-Click methods
     public void onStartSessionClick(View v){
-         ArrayList<View> studentsInSession = new ArrayList<View>();
+         ArrayList<Student> studentsInSession = new ArrayList<Student>();
+         ArrayList<String> studentIDs = new ArrayList<String>();
 
         for(int i=0; i < adapter.checked.length; i++){
             if(adapter.checked[i] == true){
-                studentsInSession.add( adapter.getView(i, null, null));
+                //String id = adapter.getView(i, null, null).;
+
             }
         }
     }
