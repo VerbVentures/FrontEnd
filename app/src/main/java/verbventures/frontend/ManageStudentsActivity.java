@@ -34,6 +34,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
 
     private ListView studentList;
     private StudentArrayAdapter adapter;
+    private Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
 
         final Context mcontext = this;
-        final Admin admin = (Admin) getIntent().getSerializableExtra("admin");
+        admin = (Admin) getIntent().getSerializableExtra("admin");
 
         final String TAG = "debug";
 
@@ -114,26 +115,31 @@ public class ManageStudentsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_manageverbs:
                 Intent manageVerbs = new Intent(this, ManageVerbsActivity.class);
+                manageVerbs.putExtra("admin", admin);
                 startActivity(manageVerbs);
                 return true;
 
             case R.id.action_manageverbpacks:
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
+                manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
                 return true;
 
             case R.id.action_createsession:
                 Intent createSession = new Intent(this, CreateSessionActivity.class);
+                createSession.putExtra("admin", admin);
                 startActivity(createSession);
                 return true;
 
             case R.id.action_sessionreports:
                 Intent sessionReports = new Intent(this, SessionReportsActivity.class);
+                sessionReports.putExtra("admin", admin);
                 startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:
                 Intent manageStudents = new Intent(this, ManageStudentsActivity.class);
+                manageStudents.putExtra("admin", admin);
                 startActivity(manageStudents);
                 return true;
 
