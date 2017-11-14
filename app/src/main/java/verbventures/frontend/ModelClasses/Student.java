@@ -36,4 +36,8 @@ public class Student implements Serializable {
         this.admin = email;
     }
 
+    public String toString() {
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
 }
