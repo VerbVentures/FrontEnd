@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="verbventures.frontend.CreateAdmin"
+    tools:context="verbventures.frontend.CreateStudent"
     tools:showIn="@layout/activity_create_admin">
 
     <EditText
@@ -37,13 +37,13 @@
         app:layout_constraintTop_toBottomOf="@+id/first-name-edit-text" />
 
     <Button
-        android:id="@+id/create-admin-button"
+        android:id="@+id/create-student-button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Create Admin Account"
+        android:text="Create New Student"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last-name-edit-text" />

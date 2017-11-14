@@ -23,6 +23,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import verbventures.frontend.ModelClasses.Admin;
 import verbventures.frontend.ModelClasses.Verb;
 
 /**
@@ -31,7 +32,7 @@ import verbventures.frontend.ModelClasses.Verb;
 
 public class ManageVerbsActivity extends AppCompatActivity {
 
-
+    private Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class ManageVerbsActivity extends AppCompatActivity {
         final String TAG = "debug";
 
         final Context mcontext = this;
+        admin = (Admin) getIntent().getSerializableExtra("admin");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,26 +108,25 @@ public class ManageVerbsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_manageverbs:
                 Intent manageVerbs = new Intent(this, ManageVerbsActivity.class);
+                manageVerbs.putExtra("admin", admin);
                 startActivity(manageVerbs);
                 return true;
 
             case R.id.action_manageverbpacks:
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
+                manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_createsession:
-                Intent createSession = new Intent(this, CreateSessionActivity.class);
-                startActivity(createSession);
                 return true;
 
             case R.id.action_sessionreports:
                 Intent sessionReports = new Intent(this, SessionReportsActivity.class);
+                sessionReports.putExtra("admin", admin);
                 startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:
                 Intent manageStudents = new Intent(this, ManageStudentsActivity.class);
+                manageStudents.putExtra("admin", admin);
                 startActivity(manageStudents);
                 return true;
 

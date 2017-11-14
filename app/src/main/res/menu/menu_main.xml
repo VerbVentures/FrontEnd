@@ -12,10 +12,6 @@
         android:title="Manage Verb Packs"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_createsession"
-        android:title="Create Session"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_sessionreports"
         android:title="Session Reports"
         app:showAsAction="never" />

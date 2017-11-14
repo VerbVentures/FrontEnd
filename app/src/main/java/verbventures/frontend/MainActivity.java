@@ -57,10 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(final Account account) {
                     // Get Account Kit ID
                     final String accountKitId = account.getId();
+                    final String email = account.getEmail();
                     Log.e("Account Kit Id", accountKitId);
 
-                    if(account.getEmail()!=null)
-                        Log.e("Email",account.getEmail());
+                    if(account.getEmail()!=null) {
+                        Log.e("Email", email);
+                    }
+
 
                     String mUrlString = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com//api/admins/" + accountKitId;
                     Request request = new Request.Builder()
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Go to CreateAdmin Activity
                                 Log.d(TAG, "New Admin");
                                 Intent intent = new Intent(MainActivity.this, CreateAdmin.class);
+                                intent.putExtra("email", email);
                                 intent.putExtra("accountKitId", accountKitId);
                                 startActivity(intent);
                             }
@@ -89,16 +93,18 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("accountKitId", accountKitId);
                                 startActivity(intent);
                             }
-                            String responseString = response.body().string();
-                            Log.d(TAG, responseString);
+                            else {
+                                String responseString = response.body().string();
+                                Log.d(TAG, responseString);
 
-                            Gson gson = new Gson();
-                            Admin admin;
-                            admin = gson.fromJson(responseString, Admin.class);
-                            Log.d("Admin",admin.toString());
-                            Intent intent = new Intent(MainActivity.this, ManageStudentsActivity.class);
-                            intent.putExtra("admin", admin);
-                            startActivity(intent);
+                                Gson gson = new Gson();
+                                Admin admin;
+                                admin = gson.fromJson(responseString, Admin.class);
+                                Log.d("Admin",admin.toString());
+                                Intent intent = new Intent(MainActivity.this, ManageStudentsActivity.class);
+                                intent.putExtra("admin", admin);
+                                startActivity(intent);
+                            }
 
                         }
                     });
