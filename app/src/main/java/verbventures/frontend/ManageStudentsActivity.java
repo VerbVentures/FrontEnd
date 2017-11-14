@@ -125,12 +125,6 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 startActivity(manageVerbPacks);
                 return true;
 
-            case R.id.action_createsession:
-                Intent createSession = new Intent(this, CreateSessionActivity.class);
-                createSession.putExtra("admin", admin);
-                startActivity(createSession);
-                return true;
-
             case R.id.action_sessionreports:
                 Intent sessionReports = new Intent(this, SessionReportsActivity.class);
                 sessionReports.putExtra("admin", admin);
