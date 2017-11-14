@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -134,5 +135,10 @@ public class ManageVerbsActivity extends AppCompatActivity {
                 // invoke superclass to handle it
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //on-Click methods
+    public void onAddVerbClick(View v){
+
     }
 }

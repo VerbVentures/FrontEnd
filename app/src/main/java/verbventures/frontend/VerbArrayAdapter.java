@@ -38,7 +38,7 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_verb, parent, false);
-            viewHolder.verb = (TextView) convertView.findViewById(R.id.tvName);
+            viewHolder.verb = (TextView) convertView.findViewById(R.id.tvVerb);
 
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
