@@ -155,6 +155,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
         }
     }
 
+    public void onCreateStudentClick(View v){
+        Intent intent = new Intent(ManageStudentsActivity.this, CreateStudent.class);
+        intent.putExtra("admin", admin);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         return;

@@ -81,6 +81,7 @@
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_activity_create_admin">CreateAdmin</string>
     <string name="title_activity_login_error">LoginError</string>
+    <string name="title_activity_create_student">CreateStudent</string>
 
 
 </resources>
