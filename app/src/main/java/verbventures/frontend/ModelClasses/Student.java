@@ -20,6 +20,10 @@ public class Student implements Serializable {
         this.user = user;
     }
 
+    public String getFirstName() { return user.getFirstName(); }
+
+    public String getLastName() { return user.getLastName(); }
+
     public String getStudentId() {
         return studentId;
     }

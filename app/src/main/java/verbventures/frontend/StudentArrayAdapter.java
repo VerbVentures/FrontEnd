@@ -32,6 +32,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         checked = new boolean[students.length];
     }
 
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -45,7 +46,6 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
             convertView = inflater.inflate(R.layout.item_student, parent, false);
             viewHolder.firstName = (TextView) convertView.findViewById(R.id.tvFirstname);
             viewHolder.lastName = (TextView) convertView.findViewById(R.id.tvLastname);
-            viewHolder.IDHolder = (EditText) convertView.findViewById(R.id.IDHolder);
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
         } else {
