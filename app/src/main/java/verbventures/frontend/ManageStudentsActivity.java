@@ -43,7 +43,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
 
         final Context mcontext = this;
-
+        final Admin admin = (Admin) getIntent().getSerializableExtra("admin");
 
         final String TAG = "debug";
 
@@ -58,6 +58,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
 
         // Grab the list view
         this.studentList = (ListView)   findViewById(R.id.student_list);
+
+        /* OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-students/" + admin.getAccountKitId())
+                .build();
+        */
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
