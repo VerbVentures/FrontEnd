@@ -8,24 +8,17 @@
     tools:context="verbventures.frontend.SessionReportsActivity"
     tools:showIn="@layout/activity_session_reports">
 
-    <TextView
-        android:id="@+id/requestText"
-        android:layout_width="184dp"
-        android:layout_height="69dp"
-        tools:layout_editor_absoluteX="358dp"
-        tools:layout_editor_absoluteY="29dp" />
 
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="178dp"
-        android:layout_height="80dp"
-        tools:layout_editor_absoluteX="361dp"
-        tools:layout_editor_absoluteY="120dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
-    <TextView
-        android:id="@+id/dataText"
-        android:layout_width="181dp"
-        android:layout_height="73dp"
-        tools:layout_editor_absoluteX="360dp"
-        tools:layout_editor_absoluteY="236dp" />
+        <ListView
+            android:id="@+id/sessionList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

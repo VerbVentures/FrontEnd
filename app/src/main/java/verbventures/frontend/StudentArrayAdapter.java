@@ -32,6 +32,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         checked = new boolean[students.length];
     }
 
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
