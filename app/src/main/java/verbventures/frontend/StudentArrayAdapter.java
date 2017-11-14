@@ -56,7 +56,6 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         // into the template view.
         viewHolder.firstName.setText(student.getUser().getFirstName());
         viewHolder.lastName.setText(student.getUser().getLastName());
-        viewHolder.IDHolder.setText(student.getUser().getUserId());
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
         // Return the completed view to render on screen
 
