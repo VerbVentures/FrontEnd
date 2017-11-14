@@ -10,21 +10,21 @@
 
     <ListView
         android:id="@+id/student_list"
-        android:layout_width="0dp"
-        android:layout_height="937dp"
+        android:layout_width="440dp"
+        android:layout_height="758dp"
         android:layout_marginEnd="52dp"
         android:layout_marginTop="45dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/startSessionButton"
-        app:layout_constraintTop_toTopOf="parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp">
+        app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 
     <Button
         android:id="@+id/startSessionButton"
-        android:layout_width="214dp"
+        android:layout_width="87dp"
         android:layout_height="105dp"
         android:layout_marginEnd="80dp"
         android:layout_marginStart="36dp"
