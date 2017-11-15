@@ -81,6 +81,10 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 final Student[] obtainedStudents = gson.fromJson(response.body().string(), Student[].class);
 
+                for(int i=0; i < obtainedStudents.length; i++) {
+                    obtainedStudents[i].setAdminObj(admin);
+                }
+
                 //in order to populate the list, we need to call the main UI thread again
                 ManageStudentsActivity.this.runOnUiThread(new Runnable() {
                     @Override

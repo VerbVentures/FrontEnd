@@ -41,7 +41,14 @@ import verbventures.frontend.ModelClasses.Student;
 public class CreateStudent extends AppCompatActivity {
 
     private Admin admin;
+    private Student student;
     public static final String TAG = "CreateStudent";
+    private boolean edit = false;
+    private boolean delete = false;
+    private JSONObject adminJSON;
+    private JSONObject userJSON;
+    private EditText etFirstName;
+    private EditText etLastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,98 +66,175 @@ public class CreateStudent extends AppCompatActivity {
             }
         });
 
+
         admin = (Admin) getIntent().getSerializableExtra("admin");
+        student = (Student) getIntent().getSerializableExtra("student");
 
-        final Button button = findViewById(R.id.create_student_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final EditText etFirstName = findViewById(R.id.first_name_edit_text);
-                String firstName = etFirstName.getText().toString();
+        if(student != null) edit = true;
 
-                final EditText etLastName = findViewById(R.id.last_name_edit_text);
-                String lastName = etLastName.getText().toString();
+        final Button createButton = findViewById(R.id.create_student_button);
+        etFirstName = findViewById(R.id.first_name_edit_text);
+        etLastName = findViewById(R.id.last_name_edit_text);
+        final Button deleteButton = findViewById(R.id.deleteStudentButton);
 
-                String accountKitId = admin.getAccountKitId();
+        if(edit){
+            createButton.setText("Save Student");
+            etFirstName.setText(student.getUser().getFirstName());
+            etLastName.setText(student.getUser().getLastName());
+            deleteButton.setVisibility(View.VISIBLE);
 
-                Log.d(TAG, "Admin = " + accountKitId);
-                Log.d(TAG, "First Name = " + firstName);
-                Log.d(TAG, "Last Name = " + lastName);
+            deleteButton.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    final Button yesDelete = findViewById(R.id.yesDeleteButton);
+                    final Button noDelete = findViewById(R.id.noDeleteButton);
+                    final TextView confirmText = findViewById(R.id.deleteConfirmText);
 
-                // create json to post
-                JSONObject adminJSON = new JSONObject();
-                JSONObject userJSON = new JSONObject();
-                try {
-                    userJSON.put("firstName", firstName);
-                    userJSON.put("lastName", lastName);
-                    adminJSON.put("user", userJSON);
-                    adminJSON.put("admin", accountKitId);
-                    // adminJSON.put("accountKitId", "12345"); // for testing
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    confirmText.setText("Are you sure you want to delete " + etFirstName.getText() + " " + etLastName.getText() + "?");
+                    confirmText.setVisibility(View.VISIBLE);
+                    yesDelete.setVisibility(View.VISIBLE);
+                    noDelete.setVisibility(View.VISIBLE);
+
+                    noDelete.setOnClickListener(new View.OnClickListener(){
+                        public void onClick(View v){
+                            yesDelete.setVisibility(View.GONE);
+                            noDelete.setVisibility(View.GONE);
+                            confirmText.setVisibility(View.GONE);
+                        }
+                    });
+
+                    yesDelete.setOnClickListener(new View.OnClickListener(){
+                        public void onClick(View v){
+                            delete = true;
+                            String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/" + student.getStudentId();
+                            makeAPIChange(url);
+                                finish();
+                        }
+                    });
                 }
+            });
+        }
 
-                // post data to web-server
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/";
+        createButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url;
+                if(edit){
+                    url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/" + student.getStudentId();
+                }
+                else {
+                    url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/";
+                }
+                makeAPIChange(url);
+            }
+        });
 
-                OkHttpClient client = new OkHttpClient();
-                RequestBody body = RequestBody.create(JSON, adminJSON.toString());
-                Request request = new Request.Builder()
+    }
+
+    private void makeAPIChange(String url){
+        Request request;
+        OkHttpClient client;
+        if(delete){
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+            client = new OkHttpClient();
+            request = new Request.Builder()
+                    .url(url)
+                    .delete()
+                    .addHeader("content-type", "application/json; charset=utf-8")
+                    .build();
+        }
+        else {
+
+            String firstName = etFirstName.getText().toString();
+
+            String lastName = etLastName.getText().toString();
+
+            String accountKitId = admin.getAccountKitId();
+
+            Log.d(TAG, "Admin = " + accountKitId);
+            Log.d(TAG, "First Name = " + firstName);
+            Log.d(TAG, "Last Name = " + lastName);
+
+            // create json to post
+            adminJSON = new JSONObject();
+            userJSON = new JSONObject();
+            try {
+                userJSON.put("firstName", firstName);
+                userJSON.put("lastName", lastName);
+                adminJSON.put("user", userJSON);
+                adminJSON.put("admin", accountKitId);
+                // adminJSON.put("accountKitId", "12345"); // for testing
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+            client = new OkHttpClient();
+            RequestBody body = RequestBody.create(JSON, adminJSON.toString());
+            if(edit){
+                request = new Request.Builder()
+                        .url(url)
+                        .put(body)
+                        .addHeader("content-type", "application/json; charset=utf-8")
+                        .build();
+            }
+            else {
+                request = new Request.Builder()
                         .url(url)
                         .post(body)
                         .addHeader("content-type", "application/json; charset=utf-8")
                         .build();
-
-                client.newCall(request).enqueue(new Callback() {
-
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("response", call.request().body().toString());
-                        Log.e(TAG, "API Error");
-                        Intent intent = new Intent(CreateStudent.this, LoginError.class);
-                        intent.putExtra("admin", admin);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            String responseString = response.body().string();
-                            Log.d(TAG, responseString);
-                            Log.e(TAG, "API Error");
-                            Intent intent = new Intent(CreateStudent.this, LoginError.class);
-                            intent.putExtra("admin", admin);
-                            startActivity(intent);
-                        }
-                        else {
-                            String responseString = response.body().string();
-                            Log.d(TAG, responseString);
-
-                            Gson gson = new Gson();
-                            final Student student;
-                            student = gson.fromJson(responseString, Student.class);
-                            Log.d("Student", student.toString());
-
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),student.toString() + " Created Successfully",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-                            etFirstName.setText("");
-                            etLastName.setText("");
-
-                        }
-
-
-                    }
-
-                });
             }
-        });
+        }
+        client.newCall(request).enqueue(new Callback() {
 
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("response", call.request().body().toString());
+                Log.e(TAG, "API Error");
+                Intent intent = new Intent(CreateStudent.this, LoginError.class);
+                intent.putExtra("admin", admin);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    String responseString = response.body().string();
+                    Log.d(TAG, responseString);
+                    Log.e(TAG, "API Error");
+                    Intent intent = new Intent(CreateStudent.this, LoginError.class);
+                    intent.putExtra("admin", admin);
+                    startActivity(intent);
+                }
+                else {
+                    String responseString = response.body().string();
+                    Log.d(TAG, responseString);
+                    if(!edit && !delete) {
+                        Gson gson = new Gson();
+                        final Student student;
+                        student = gson.fromJson(responseString, Student.class);
+                        student.setAdminObj(admin); // add this line
+                        Log.d("Student", student.toString());
+
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), student.toString() + " Created Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        etFirstName.setText("");
+                        etLastName.setText("");
+                    }
+
+
+                }
+
+
+            }
+
+        });
     }
 
     @Override
