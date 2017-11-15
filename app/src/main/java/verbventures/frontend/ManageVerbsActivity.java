@@ -62,7 +62,7 @@ public class ManageVerbsActivity extends AppCompatActivity {
         // Create the client and form the request
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbs/")
+                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-verbs/" + admin.getAccountKitId())
                 .build();
 
         // Call the client enqueue with a callback function
