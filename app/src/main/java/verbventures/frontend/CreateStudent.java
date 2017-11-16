@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public class CreateStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_create_student);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
@@ -106,8 +108,7 @@ public class CreateStudent extends AppCompatActivity {
                         public void onClick(View v){
                             delete = true;
                             String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/" + student.getStudentId() + "/";
-                            makeAPIChange(url);
-                            finish();
+                                finish();
                         }
                     });
                 }
@@ -119,11 +120,14 @@ public class CreateStudent extends AppCompatActivity {
                 String url;
                 if(edit){
                     url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/" + student.getStudentId() + "/";
+                    makeAPIChange(url);
+                    finish();
                 }
                 else {
                     url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/";
+                    makeAPIChange(url);
                 }
-                makeAPIChange(url);
+
             }
         });
 
@@ -162,6 +166,7 @@ public class CreateStudent extends AppCompatActivity {
                 userJSON.put("lastName", lastName);
                 adminJSON.put("user", userJSON);
                 adminJSON.put("admin", accountKitId);
+                // adminJSON.put("accountKitId", "12345"); // for testing
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -229,6 +234,7 @@ public class CreateStudent extends AppCompatActivity {
 
 
                 }
+
 
             }
 

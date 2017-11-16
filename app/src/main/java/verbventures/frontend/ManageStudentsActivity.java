@@ -166,4 +166,9 @@ public class ManageStudentsActivity extends AppCompatActivity {
         return;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 }
