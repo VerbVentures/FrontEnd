@@ -1,6 +1,5 @@
 package verbventures.frontend;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,81 +10,81 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-import com.google.gson.Gson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.RequestBody;
 import verbventures.frontend.ModelClasses.Admin;
-import verbventures.frontend.ModelClasses.Verb;
+import verbventures.frontend.ModelClasses.VerbPack;
 
-/**
- * Created by Jacob on 11/8/2017.
- */
-
-public class ManageVerbsActivity extends AppCompatActivity {
+public class createVerbPack extends AppCompatActivity {
 
     private Admin admin;
+    private VerbPack verbPack;
+    public static String TAG;
+    public static Boolean editFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_verbs);
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mytoolbar);
+        setContentView(R.layout.activity_create_verb_pack);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        TAG = this.getClass().getSimpleName();
 
-        final String TAG = "debug";
+        //get the views we need
+        final EditText etVerbPack = findViewById(R.id.etVerbPackTitle);
+        final Button btnCreateVerbPack = findViewById(R.id.btnCreateVerbPack);
 
-        final Context mcontext = this;
+        //get the passed in information
         admin = (Admin) getIntent().getSerializableExtra("admin");
+        try {
+            //if we were given a verb pack, populate the text box
+            verbPack = (VerbPack) getIntent().getSerializableExtra("verbPack");
+            etVerbPack.setText(verbPack.getTitle());
+            editFlag = true;
+        } catch (Exception ex) {
+            //the verb pack is empty, so we don't need to populate
+            verbPack = new VerbPack();
+            editFlag = false;
+        }
 
-        //grab the list view
-        final ListView listView = (ListView) findViewById(R.id.verb_list);
-
-        // Create the client and form the request
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbs/")
-                .build();
-
-        // Call the client enqueue with a callback function
-        client.newCall(request).enqueue(new Callback() {
+        btnCreateVerbPack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d(TAG,"request unsuccessful");
-                e.printStackTrace();
-            }
+            public void onClick(View view) {
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //convert to a list from JSON using Gson
-                Gson gson = new Gson();
-                final Verb[] obtainedVerbs = gson.fromJson(response.body().string(), Verb[].class);
+                String accountKitId = admin.getAccountKitId();
+                String verbPackName = etVerbPack.getText().toString();
+                //set the object attributes
+                verbPack.setTitle(verbPackName);
+                verbPack.setAdmin(accountKitId);
 
-                //in order to populate the list, we need to call the main UI thread again
-                ManageVerbsActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        VerbArrayAdapter adapter = new VerbArrayAdapter(mcontext, obtainedVerbs);
-                        // Attach the adapter to a ListView
-                        listView.setAdapter(adapter);
-                    }
-                });
+                Log.d(TAG, "verb pack name: " + verbPackName );
+                Log.d(TAG, "admin ID: " + accountKitId);
+
+
+
+                Intent intent = new Intent(createVerbPack.this, selectVerbsActivity.class);
+                intent.putExtra("admin", admin);
+                intent.putExtra("verbPack",verbPack);
+                intent.putExtra("editFlag", editFlag);
+                startActivity(intent);
 
             }
         });
 
 
-
-
     }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,4 +126,5 @@ public class ManageVerbsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

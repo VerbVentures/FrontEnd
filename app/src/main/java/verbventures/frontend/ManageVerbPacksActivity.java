@@ -52,15 +52,6 @@ public class ManageVerbPacksActivity extends AppCompatActivity {
         admin = (Admin) getIntent().getSerializableExtra("admin");
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/")
@@ -79,6 +70,10 @@ public class ManageVerbPacksActivity extends AppCompatActivity {
                 //convert to a list from JSON using Gson
                 Gson gson = new Gson();
                 final VerbPack[] obtainedVerbPacks = gson.fromJson(response.body().string(), VerbPack[].class);
+
+                for (int i = 0; i < obtainedVerbPacks.length; ++i) {
+                    obtainedVerbPacks[i].setAdminObj(admin);
+                }
 
                 //in order to populate the list, we need to call the main UI thread again
                 ManageVerbPacksActivity.this.runOnUiThread(new Runnable() {
@@ -101,6 +96,14 @@ public class ManageVerbPacksActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+
+
+    public void onCreateVerbPackClick(View v){
+        Intent intent = new Intent(ManageVerbPacksActivity.this, createVerbPack.class);
+        intent.putExtra("admin", admin);
+        startActivity(intent);
     }
 
     @Override

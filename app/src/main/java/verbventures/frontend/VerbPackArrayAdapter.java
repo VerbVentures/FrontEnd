@@ -1,11 +1,13 @@
 package verbventures.frontend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class VerbPackArrayAdapter extends ArrayAdapter<VerbPack> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        VerbPack verbPack = getItem(position);
+        final VerbPack verbPack = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
@@ -48,6 +50,16 @@ public class VerbPackArrayAdapter extends ArrayAdapter<VerbPack> {
         }
         // populate the view with the data
         viewHolder.title.setText(verbPack.getTitle());
+
+        Button editButton = convertView.findViewById(R.id.btnEdit);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), createVerbPack.class);
+                intent.putExtra("admin",  verbPack.getAdminObj());
+                intent.putExtra("verbPack", verbPack);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         // Return the completed view to render on screen
         return convertView;

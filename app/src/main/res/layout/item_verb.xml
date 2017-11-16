@@ -19,5 +19,12 @@
         android:layout_height="wrap_content"
         android:text="Edit" />
 
+    <CheckBox
+        android:id="@+id/cbIncludeInPack"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Include in pack" />
+
 
 </LinearLayout>

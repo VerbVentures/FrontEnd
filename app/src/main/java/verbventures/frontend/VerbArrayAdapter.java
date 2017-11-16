@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import verbventures.frontend.ModelClasses.Verb;
 
@@ -23,14 +26,28 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
 
     }
 
+    private static boolean checkBoxFlag;
+    public boolean[] checked;
+    private String[] verbsInPack;
+
+
     public VerbArrayAdapter(Context context, Verb[] verbs) {
         super(context, R.layout.item_verb, verbs);
+    }
+
+    public VerbArrayAdapter(Context context, Verb[] verbs, String[] packVerbs) {
+        super(context, R.layout.item_verb, verbs);
+        checkBoxFlag = true;
+        verbsInPack = packVerbs;
+        checked = new boolean[verbs.length];
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Verb verb = getItem(position);
+        //need a final var to use later
+        final int position2 = position;
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
@@ -49,6 +66,33 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
         // Populate the data from the data object via the viewHolder object
         // into the template view.
         viewHolder.verb.setText(verb.getVerb());
+        if (checkBoxFlag) {
+            CheckBox cb = convertView.findViewById(R.id.cbIncludeInPack);
+            cb.setVisibility(View.VISIBLE);
+            Button btnEdit = convertView.findViewById(R.id.btn);
+            btnEdit.setVisibility(View.GONE);
+
+            //pre populate the checkboxes
+            if (verbsInPack != null && Arrays.asList(verbsInPack).contains(verb.getVerbId())) {
+                cb.setChecked(true);
+            }
+
+
+            cb.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    if(((CheckBox)v).isChecked())
+                    {
+                        checked[position2]=true;
+                    }
+                    else
+                    {
+                        checked[position2]=false;
+
+                    }
+                }
+            });
+        }
 
         // Return the completed view to render on screen
         return convertView;
