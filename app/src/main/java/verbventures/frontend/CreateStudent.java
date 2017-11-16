@@ -108,7 +108,8 @@ public class CreateStudent extends AppCompatActivity {
                         public void onClick(View v){
                             delete = true;
                             String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/" + student.getStudentId() + "/";
-                                finish();
+                            makeAPIChange(url);
+                            finish();
                         }
                     });
                 }
@@ -232,9 +233,14 @@ public class CreateStudent extends AppCompatActivity {
                         etLastName.setText("");
                     }
 
+                    else{
+                        Intent intent = new Intent(CreateStudent.this, ManageStudentsActivity.class);
+                        intent.putExtra("admin", admin);
+                        startActivity(intent);
+                    }
+
 
                 }
-
 
             }
 

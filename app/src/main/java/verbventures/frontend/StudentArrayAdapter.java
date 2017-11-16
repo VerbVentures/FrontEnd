@@ -1,5 +1,6 @@
 package verbventures.frontend;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         TextView firstName;
         TextView lastName;
         EditText IDHolder;
+
     }
 
     public StudentArrayAdapter(Context context, Student[] students) {
@@ -67,7 +69,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
                 Intent intent = new Intent(v.getContext(), CreateStudent.class);
                 intent.putExtra("admin", student.getAdminObj());
                 intent.putExtra("student", student);
-                v.getContext().startActivity(intent);
+                 v.getContext().startActivity(intent);
             }
         });
         // Return the completed view to render on screen
@@ -88,4 +90,5 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         });
         return convertView;
     }
+
 }
