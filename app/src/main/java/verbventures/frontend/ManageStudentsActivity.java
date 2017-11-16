@@ -137,6 +137,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 startActivity(manageStudents);
                 return true;
 
+            case R.id.action_signout:
+                Intent logout = new Intent(this, MainActivity.class);
+                logout.putExtra("signout", true);
+                startActivity(logout);
+                return true;
+
             default:
                 // if we get here, the user's action wasn't recognized
                 // invoke superclass to handle it

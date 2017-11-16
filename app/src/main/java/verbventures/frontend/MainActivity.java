@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean signOut = getIntent().getBooleanExtra("signout", false);
+        if(signOut){
+            logout(null);
+        }
+
         getCurrentAccount();
 
     }
