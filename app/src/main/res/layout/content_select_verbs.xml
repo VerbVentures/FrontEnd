@@ -5,26 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="verbventures.frontend.ManageVerbPacksActivity"
-    tools:showIn="@layout/activity_manage_verb_packs">
+    tools:context="verbventures.frontend.selectVerbsActivity"
+    tools:showIn="@layout/activity_select_verbs">
 
 
     <Button
-        android:id="@+id/createVerbPackButton"
+        android:id="@+id/btnFinish"
         android:layout_width="153dp"
         android:layout_height="74dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:onClick="onCreateVerbPackClick"
         android:text="Add Verb Pack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verbPack_list"
+        app:layout_constraintTop_toBottomOf="@+id/lvVerbList"
         app:layout_constraintVertical_bias="1.0" />
 
     <ListView
-        android:id="@+id/verbPack_list"
+        android:id="@+id/lvVerbList"
         android:layout_width="544dp"
         android:layout_height="705dp"
         android:layout_marginEnd="8dp"

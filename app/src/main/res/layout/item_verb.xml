@@ -16,5 +16,12 @@
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="Edit/Delete" />
+        android:text="Edit" />
+
+    <CheckBox
+        android:id="@+id/cbIncludeInPack"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Include in pack" />
 </LinearLayout>

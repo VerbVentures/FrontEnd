@@ -42,23 +42,23 @@
         <activity
             android:name=".ManageVerbsActivity"
             android:label="ManageVerbs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ManageVerbPacksActivity"
             android:label="ManageVerbPacks"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SessionReportsActivity"
             android:label="SessionReports"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateSessionActivity"
             android:label="CreateSession"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ManageStudentsActivity"
             android:label="ManageStudents"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.facebook.accountkit.ui.AccountKitEmailRedirectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -80,6 +80,14 @@
         <activity
             android:name=".CreateStudent"
             android:label="@string/title_activity_create_student"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".createVerbPack"
+            android:label="@string/title_activity_create_verb_pack"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".selectVerbsActivity"
+            android:label="@string/title_activity_select_verbs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AddVerb"

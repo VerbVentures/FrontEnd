@@ -10,6 +10,7 @@ public class VerbPack implements Serializable {
     private String verbPackId;
     private String title;
     private String admin;
+    private Admin adminObj;
     private String[] verbPackVerbs;
     private String[] userVerbPacks;
 
@@ -32,6 +33,12 @@ public class VerbPack implements Serializable {
     public String getAdmin() {
         return admin;
     }
+
+    public Admin getAdminObj() {
+        return adminObj;
+    }
+
+    public void setAdminObj(Admin admin) { this.adminObj = admin; }
 
     public void setAdmin(String admin) {
         this.admin = admin;

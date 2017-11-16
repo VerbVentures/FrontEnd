@@ -47,15 +47,6 @@ public class ManageVerbsActivity extends AppCompatActivity {
         final Context mcontext = this;
         admin = (Admin) getIntent().getSerializableExtra("admin");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         //grab the list view
         final ListView listView = (ListView) findViewById(R.id.verb_list);
 

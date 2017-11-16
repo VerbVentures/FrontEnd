@@ -82,6 +82,8 @@
     <string name="title_activity_create_admin">CreateAdmin</string>
     <string name="title_activity_login_error">LoginError</string>
     <string name="title_activity_create_student">CreateStudent</string>
+    <string name="title_activity_create_verb_pack">createVerbPack</string>
+    <string name="title_activity_select_verbs">selectVerbsActivity</string>
 
 
 </resources>
