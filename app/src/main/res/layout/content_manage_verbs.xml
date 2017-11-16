@@ -8,14 +8,29 @@
     tools:context="verbventures.frontend.ManageVerbsActivity"
     tools:showIn="@layout/activity_manage_verbs">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <ListView
+    <ListView
             android:id="@+id/verb_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_width="440dp"
+            android:layout_height="758dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginTop="45dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10.0sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addVerbButton"
+            app:layout_constraintTop_toTopOf="parent">
+        </ListView>
+
+    <Button
+        android:id="@+id/addVerbButton"
+        android:layout_width="87dp"
+        android:layout_height="105dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="45dp"
+        android:onClick="onAddVerbClick"
+        android:text="Add verb"
+        app:layout_constraintEnd_toStartOf="@+id/verb_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

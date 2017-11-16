@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -52,7 +53,7 @@ public class ManageVerbsActivity extends AppCompatActivity {
         // Create the client and form the request
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbs/")
+                .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-verbs/" + admin.getAccountKitId())
                 .build();
 
         // Call the client enqueue with a callback function
@@ -121,10 +122,23 @@ public class ManageVerbsActivity extends AppCompatActivity {
                 startActivity(manageStudents);
                 return true;
 
+            case R.id.action_signout:
+                Intent logout = new Intent(this, MainActivity.class);
+                logout.putExtra("signout", true);
+                startActivity(logout);
+                return true;
+
             default:
                 // if we get here, the user's action wasn't recognized
                 // invoke superclass to handle it
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //on-Click methods
+    public void onAddVerbClick(View v){
+        Intent addVerb = new Intent(this, AddVerb.class);
+        addVerb.putExtra("admin", admin);
+        startActivity(addVerb);
     }
 }

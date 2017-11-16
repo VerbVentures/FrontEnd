@@ -1,21 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
-        android:id="@+id/tvName"
-        android:layout_width="260dp"
+        android:id="@+id/tvVerb"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
         android:focusable="false"
         android:fontFamily="sans-serif-medium"
         android:text="verb"
         android:textSize="25sp" />
-
-
     <Button
         android:id="@+id/btn"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="70dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="Edit" />
 
@@ -25,6 +24,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Include in pack" />
-
-
 </LinearLayout>

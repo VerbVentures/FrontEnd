@@ -10,6 +10,7 @@ public class Student implements Serializable {
 
     private VerbVentureUser user;
     private String studentId;
+    private Admin adminObj;
     private String admin;
 
     public VerbVentureUser getUser() {
@@ -36,8 +37,12 @@ public class Student implements Serializable {
         return admin;
     }
 
-    public void setAdmin(String email) {
-        this.admin = email;
+    public void setAdminObj(Admin adminObj) {
+        this.adminObj = adminObj;
+    }
+
+    public Admin getAdminObj() {
+        return adminObj;
     }
 
     public String toString() {

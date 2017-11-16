@@ -1,11 +1,14 @@
 package verbventures.frontend;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         TextView firstName;
         TextView lastName;
         EditText IDHolder;
+
     }
 
     public StudentArrayAdapter(Context context, Student[] students) {
@@ -36,7 +40,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Student student = getItem(position);
+        final Student student = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
@@ -57,6 +61,16 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         viewHolder.firstName.setText(student.getUser().getFirstName());
         viewHolder.lastName.setText(student.getUser().getLastName());
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
+
+        Button editButton = convertView.findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), CreateStudent.class);
+                intent.putExtra("admin", student.getAdminObj());
+                intent.putExtra("student", student);
+                 v.getContext().startActivity(intent);
+            }
+        });
         // Return the completed view to render on screen
 
         cb.setOnClickListener(new View.OnClickListener() {
@@ -75,4 +89,5 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
         });
         return convertView;
     }
+
 }

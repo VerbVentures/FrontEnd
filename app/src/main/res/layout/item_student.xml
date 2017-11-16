@@ -24,7 +24,7 @@
         android:textSize="25sp" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/editButton"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="70dp"
         android:layout_height="wrap_content"

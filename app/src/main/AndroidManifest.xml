@@ -89,6 +89,14 @@
             android:name=".selectVerbsActivity"
             android:label="@string/title_activity_select_verbs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AddVerb"
+            android:label="AddVerb"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AddAnimation"
+            android:label="AddAnimation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

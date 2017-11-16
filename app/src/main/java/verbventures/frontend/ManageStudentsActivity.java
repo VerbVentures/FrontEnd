@@ -81,6 +81,10 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 final Student[] obtainedStudents = gson.fromJson(response.body().string(), Student[].class);
 
+                for(int i=0; i < obtainedStudents.length; i++) {
+                    obtainedStudents[i].setAdminObj(admin);
+                }
+
                 //in order to populate the list, we need to call the main UI thread again
                 ManageStudentsActivity.this.runOnUiThread(new Runnable() {
                     @Override
@@ -133,6 +137,12 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 startActivity(manageStudents);
                 return true;
 
+            case R.id.action_signout:
+                Intent logout = new Intent(this, MainActivity.class);
+                logout.putExtra("signout", true);
+                startActivity(logout);
+                return true;
+
             default:
                 // if we get here, the user's action wasn't recognized
                 // invoke superclass to handle it
@@ -157,9 +167,16 @@ public class ManageStudentsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     @Override
     public void onBackPressed() {
         return;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 
 }
