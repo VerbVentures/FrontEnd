@@ -1,6 +1,8 @@
 package verbventures.frontend;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import verbventures.frontend.ModelClasses.Admin;
 import verbventures.frontend.ModelClasses.Verb;
 
 /**
@@ -45,7 +48,7 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Verb verb = getItem(position);
+        final Verb verb = getItem(position);
         //need a final var to use later
         final int position2 = position;
         // Check if an existing view is being reused, otherwise inflate the view
@@ -66,11 +69,24 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
         // Populate the data from the data object via the viewHolder object
         // into the template view.
         viewHolder.verb.setText(verb.getVerb());
+        Intent intent = ((Activity) this.getContext()).getIntent();
+        final Admin admin = (Admin) intent.getSerializableExtra("admin");
+
+
+        Button editButton = convertView.findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), AddVerb.class);
+                intent.putExtra("admin", admin);
+                intent.putExtra("verb", verb);
+                v.getContext().startActivity(intent);
+            }
+        });
+
         if (checkBoxFlag) {
-            CheckBox cb = convertView.findViewById(R.id.cbIncludeInPack);
+            CheckBox cb = convertView.findViewById(R.id.checkBox);
             cb.setVisibility(View.VISIBLE);
-            Button btnEdit = convertView.findViewById(R.id.btn);
-            btnEdit.setVisibility(View.GONE);
+            editButton.setVisibility(View.GONE);
 
             //pre populate the checkboxes
             if (verbsInPack != null && Arrays.asList(verbsInPack).contains(verb.getVerbId())) {

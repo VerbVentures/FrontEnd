@@ -141,4 +141,9 @@ public class ManageVerbsActivity extends AppCompatActivity {
         addVerb.putExtra("admin", admin);
         startActivity(addVerb);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
