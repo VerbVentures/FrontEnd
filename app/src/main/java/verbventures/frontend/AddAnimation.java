@@ -89,7 +89,8 @@ public class AddAnimation extends AppCompatActivity {
 
                 // create json to post
                 for(int i = 0; i < addresses.length; i++) {
-                    JSONObject animationJSON = new JSONObject();
+                    if(addresses[i].equals("")) continue;
+                        JSONObject animationJSON = new JSONObject();
                     try {
                         animationJSON.put("verb", verbId);
                         animationJSON.put("imageAddress", addresses[i]);

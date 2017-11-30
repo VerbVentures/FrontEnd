@@ -9,18 +9,74 @@
     tools:layout_editor_absoluteY="89dp"
     tools:showIn="@layout/activity_add_verb">
 
+    <Button
+        android:id="@+id/deleteButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/deleteRed"
+        android:text="Delete Student"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createButton" />
+
+    <Button
+        android:id="@+id/noDeleteButton"
+        android:layout_width="96dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:text="No"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/deleteConfirmText"
+        app:layout_constraintTop_toBottomOf="@+id/deleteConfirmText" />
+
+    <TextView
+        android:id="@+id/deleteConfirmText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Are you sure?"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/yesDeleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+
+    <Button
+        android:id="@+id/yesDeleteButton"
+        android:layout_width="88dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="88dp"
+        android:background="@color/deleteRed"
+        android:text="Yes"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/deleteConfirmText"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+
     <EditText
         android:id="@+id/etVerb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="231dp"
         android:ems="10"
         android:hint="Verb"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/etDefinition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,13 +85,12 @@
         android:id="@+id/etDefinition"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="23dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Definition"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/createButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etVerb" />
@@ -44,72 +99,12 @@
         android:id="@+id/createButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
         android:text="Add Verb"
-        app:layout_constraintBottom_toTopOf="@+id/deleteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDefinition" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginStart="71dp"
-        android:background="@color/deleteRed"
-        android:text="Delete Verb"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/deleteConfirmText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createButton" />
-
-    <Button
-        android:id="@+id/noDeleteButton"
-        android:layout_width="108dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="211dp"
-        android:layout_marginEnd="162dp"
-        android:text="No"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/yesDeleteButton"
-        app:layout_constraintTop_toBottomOf="@+id/deleteConfirmText" />
-
-    <TextView
-        android:id="@+id/deleteConfirmText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Are you sure?"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/noDeleteButton"
-        app:layout_constraintStart_toEndOf="@+id/yesDeleteButton"
-        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
-
-    <Button
-        android:id="@+id/yesDeleteButton"
-        android:layout_width="98dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/deleteRed"
-        android:text="Yes"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/noDeleteButton"
-        app:layout_constraintEnd_toStartOf="@+id/noDeleteButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteConfirmText"
-        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

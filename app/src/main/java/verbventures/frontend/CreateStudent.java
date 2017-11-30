@@ -77,7 +77,7 @@ public class CreateStudent extends AppCompatActivity {
         final Button createButton = findViewById(R.id.create_student_button);
         etFirstName = findViewById(R.id.first_name_edit_text);
         etLastName = findViewById(R.id.last_name_edit_text);
-        final Button deleteButton = findViewById(R.id.deleteStudentButton);
+        final Button deleteButton = findViewById(R.id.deleteButton);
 
         if(edit){
             createButton.setText("Save Student");

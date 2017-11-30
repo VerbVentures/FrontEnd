@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/last-name-edit-text" />
 
     <Button
-        android:id="@+id/deleteStudentButton"
+        android:id="@+id/deleteButton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:text="No"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/deleteConfirmText"
@@ -87,11 +87,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Are you sure?"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/yesDeleteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteStudentButton" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
 
     <Button
         android:id="@+id/yesDeleteButton"
@@ -102,8 +102,8 @@
         android:background="@color/deleteRed"
         android:text="Yes"
         android:textColor="@color/white"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/deleteConfirmText"
-        app:layout_constraintTop_toBottomOf="@+id/deleteStudentButton" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
 
 </android.support.constraint.ConstraintLayout>

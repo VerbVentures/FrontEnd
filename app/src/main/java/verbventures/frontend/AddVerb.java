@@ -143,13 +143,13 @@ public class AddVerb extends AppCompatActivity {
             String accountKitId = admin.getAccountKitId();
 
             Log.d(TAG, "Admin = " + accountKitId);
-            Log.d(TAG, "First Name = " + verbString);
-            Log.d(TAG, "Last Name = " + def);
+            Log.d(TAG, "Verb = " + verbString);
+            Log.d(TAG, "Definition = " + def);
 
             // create json to post
             verbJSON = new JSONObject();
             try {
-                verbJSON.put("verb", verb);
+                verbJSON.put("verb", verbString);
                 verbJSON.put("definition", def);
                 verbJSON.put("admin", accountKitId);
             } catch (JSONException e) {
@@ -204,25 +204,21 @@ public class AddVerb extends AppCompatActivity {
                         final Verb verb;
                         verb = gson.fromJson(responseString, Verb.class);
                         Log.d("Verb", verb.toString());
-
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
 
                             @Override
                             public void run() {
-                                Toast.makeText(getApplicationContext(), verb.toString() + " Created Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), verb.getVerb() + " Created Successfully", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        etVerb.setText("");
-                        etDefinition.setText("");
+                        Intent intent = new Intent(AddVerb.this, AddAnimation.class);
+                        intent.putExtra("admin", admin);
+                        intent.putExtra("verb", verb);
+                        startActivity(intent);
                     }
 
                     else{
-                        Intent intent;
-                        if(edit)
-                            intent = new Intent(AddVerb.this, ManageVerbsActivity.class);
-                        else
-                            intent = new Intent(AddVerb.this, AddAnimation.class);
-
+                        Intent intent = new Intent(AddVerb.this, ManageVerbsActivity.class);
                         intent.putExtra("admin", admin);
                         intent.putExtra("verb", verb);
                         startActivity(intent);
