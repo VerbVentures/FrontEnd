@@ -146,7 +146,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                 if (editFlag) {
                     //if we are editing a verb, we need to do a PUT
                     MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                    String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/" + verbPack.getVerbPackId();
+                    String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/" + verbPack.getVerbPackId() + '/';
                     RequestBody body = RequestBody.create(JSON, verbPackJSON.toString());
                     request = new Request.Builder()
                             .url(url)
