@@ -56,6 +56,10 @@
             android:label="CreateSession"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".LearnSession"
+            android:label="CreateSession"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ManageStudentsActivity"
             android:label="ManageStudents"
             android:theme="@style/AppTheme.NoActionBar" />

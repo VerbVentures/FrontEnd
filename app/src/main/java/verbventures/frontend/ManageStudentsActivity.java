@@ -155,10 +155,14 @@ public class ManageStudentsActivity extends AppCompatActivity {
          ArrayList<Student> studentsInSession = new ArrayList<Student>();
 
         for(int i=0; i < adapter.checked.length; i++){
-            if(adapter.checked[i] == true){
+            if(adapter.checked[i]){
                 studentsInSession.add(adapter.getItem(i));
             }
         }
+        Intent intent = new Intent(ManageStudentsActivity.this, LearnSession.class);
+        intent.putExtra("admin", admin);
+        intent.putExtra("studentsInSession", studentsInSession);
+        startActivity(intent);
     }
 
     public void onCreateStudentClick(View v){
