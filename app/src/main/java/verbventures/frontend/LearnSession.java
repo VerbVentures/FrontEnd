@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -57,6 +60,7 @@ public class LearnSession extends AppCompatActivity {
     public RandomVerb testGson;
     //public InvalidAnimations testGson2;
     private Admin admin;
+    private int totalRuns;
     private TextToSpeech tts;
 
     @Override
@@ -88,11 +92,11 @@ public class LearnSession extends AppCompatActivity {
 
         final Context mcontext = this;
         admin = (Admin) getIntent().getSerializableExtra("admin");
-        ArrayList<Student> studentsInSession = (ArrayList<Student>) getIntent().getSerializableExtra("studentsInSession");
+        totalRuns = (int) getIntent().getSerializableExtra("totalRuns");
+        final ArrayList<Student> studentsInSession = (ArrayList<Student>) getIntent().getSerializableExtra("studentsInSession");
 
-        for (int i = 0; i < studentsInSession.size(); i++) {
 
-            String key = studentsInSession.get(i).getStudentId();
+            String key = studentsInSession.get(0).getStudentId();
 
             // Create the client and form the request
             OkHttpClient client = new OkHttpClient();
@@ -122,11 +126,14 @@ public class LearnSession extends AppCompatActivity {
                     //List<InvalidAnimations> test3 = Arrays.asList(testGson2);
                     //Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + testGson.getInvalidAnimations().get(1).getImageAddress());
 
+
                     LearnSession.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             TextView textView = findViewById(R.id.verb_text_view);
+                            TextView textViewStudent = findViewById(R.id.student_text_view);
                             textView.setText(testGson.getSelectedVerb().getVerb());
+                            textViewStudent.setText("It is currently " + studentsInSession.get(0) + "'s turn!");
                             speak(testGson.getSelectedVerb().getVerb());
                             topLeft = (ImageView) findViewById(R.id.imageView1);
                             topRight = (ImageView) findViewById(R.id.imageView2);
@@ -173,14 +180,34 @@ public class LearnSession extends AppCompatActivity {
                 }
             });
 
-
+            Log.d(TAG, "total runs is !!!!!!!!!!!! " + totalRuns);
             final View imageButton1 = findViewById(R.id.imageButton1);
             imageButton1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String correct = testGson.getCorrectAnimation().getImageAddress();
                     if (correct.equals(arrayOfImages[0])) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "You are correct!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Collections.rotate(studentsInSession, -1);
+                        Intent intent = getIntent();
+                        totalRuns++;
+                        intent.putExtra("totalRuns", totalRuns);
+                        if(totalRuns == studentsInSession.size() * 2) {
+                            Intent manageStudents = new Intent(mcontext, ManageStudentsActivity.class);
+                            manageStudents.putExtra("admin", admin);
+                            startActivity(manageStudents);
+                            finish();
+                        }
+                        else {
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         imageView1.setVisibility(view.INVISIBLE);
                     }
@@ -192,7 +219,27 @@ public class LearnSession extends AppCompatActivity {
                 public void onClick(View view) {
                     String correct = testGson.getCorrectAnimation().getImageAddress();
                     if (correct.equals(arrayOfImages[1])) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "You are correct!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Collections.rotate(studentsInSession, -1);
+                        Intent intent = getIntent();
+                        totalRuns++;
+                        intent.putExtra("totalRuns", totalRuns);
+                        if(totalRuns == studentsInSession.size() * 2) {
+                            Intent manageStudents = new Intent(mcontext, ManageStudentsActivity.class);
+                            manageStudents.putExtra("admin", admin);
+                            startActivity(manageStudents);
+                            finish();
+                        }
+                        else {
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         imageView2.setVisibility(view.INVISIBLE);
                     }
@@ -204,7 +251,27 @@ public class LearnSession extends AppCompatActivity {
                 public void onClick(View view) {
                     String correct = testGson.getCorrectAnimation().getImageAddress();
                     if (correct.equals(arrayOfImages[2])) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "You are correct!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Collections.rotate(studentsInSession, -1);
+                        Intent intent = getIntent();
+                        totalRuns++;
+                        intent.putExtra("totalRuns", totalRuns);
+                        if(totalRuns == studentsInSession.size() * 2) {
+                            Intent manageStudents = new Intent(mcontext, ManageStudentsActivity.class);
+                            manageStudents.putExtra("admin", admin);
+                            startActivity(manageStudents);
+                            finish();
+                        }
+                        else {
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         imageView3.setVisibility(view.INVISIBLE);
                     }
@@ -216,13 +283,32 @@ public class LearnSession extends AppCompatActivity {
                 public void onClick(View view) {
                     String correct = testGson.getCorrectAnimation().getImageAddress();
                     if (correct.equals(arrayOfImages[3])) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "You are correct!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Collections.rotate(studentsInSession, -1);
+                        Intent intent = getIntent();
+                        totalRuns++;
+                        intent.putExtra("totalRuns", totalRuns);
+                        if(totalRuns == studentsInSession.size() * 2) {
+                            Intent manageStudents = new Intent(mcontext, ManageStudentsActivity.class);
+                            manageStudents.putExtra("admin", admin);
+                            startActivity(manageStudents);
+                            finish();
+                        }
+                        else {
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         imageView4.setVisibility(view.INVISIBLE);
                     }
                 }
             });
-        }
     }
 
     private void speak(String text){

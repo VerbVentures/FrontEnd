@@ -162,6 +162,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         Intent intent = new Intent(ManageStudentsActivity.this, LearnSession.class);
         intent.putExtra("admin", admin);
         intent.putExtra("studentsInSession", studentsInSession);
+        intent.putExtra("totalRuns", 0);
         startActivity(intent);
     }
 
