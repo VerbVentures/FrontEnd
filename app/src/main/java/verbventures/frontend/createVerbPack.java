@@ -49,6 +49,7 @@ public class createVerbPack extends AppCompatActivity {
             verbPack = (VerbPack) getIntent().getSerializableExtra("verbPack");
             etVerbPack.setText(verbPack.getTitle());
             editFlag = true;
+            btnCreateVerbPack.setText("Save Verb Pack");
         } catch (Exception ex) {
             //the verb pack is empty, so we don't need to populate
             verbPack = new VerbPack();
@@ -75,6 +76,7 @@ public class createVerbPack extends AppCompatActivity {
                 intent.putExtra("verbPack",verbPack);
                 intent.putExtra("editFlag", editFlag);
                 startActivity(intent);
+                finish();
 
             }
         });

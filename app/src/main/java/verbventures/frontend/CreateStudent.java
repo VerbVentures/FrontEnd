@@ -46,6 +46,7 @@ public class CreateStudent extends AppCompatActivity {
     public static final String TAG = "CreateStudent";
     private boolean edit = false;
     private boolean delete = false;
+    private boolean more = false;
     private JSONObject adminJSON;
     private JSONObject userJSON;
     private EditText etFirstName;
@@ -73,6 +74,7 @@ public class CreateStudent extends AppCompatActivity {
         student = (Student) getIntent().getSerializableExtra("student");
 
         if(student != null) edit = true;
+
 
         final Button createButton = findViewById(R.id.create_student_button);
         etFirstName = findViewById(R.id.first_name_edit_text);
@@ -127,6 +129,17 @@ public class CreateStudent extends AppCompatActivity {
                 else {
                     url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/students/";
                     makeAPIChange(url);
+                    final Button btnDone = findViewById(R.id.btnDone);
+                    btnDone.setVisibility(View.VISIBLE);
+
+                    btnDone.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(CreateStudent.this, ManageStudentsActivity.class);
+                            intent.putExtra("admin", admin);
+                            startActivity(intent);
+                        }
+                    });
                 }
 
             }
@@ -231,6 +244,8 @@ public class CreateStudent extends AppCompatActivity {
                         });
                         etFirstName.setText("");
                         etLastName.setText("");
+                        more = true;
+
                     }
 
                     else{

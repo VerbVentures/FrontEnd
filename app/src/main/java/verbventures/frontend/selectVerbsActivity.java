@@ -64,6 +64,8 @@ public class selectVerbsActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.lvVerbList);
         final Button btnFinish = (Button) findViewById(R.id.btnFinish);
 
+        if(editFlag) btnFinish.setText("Save Verb Pack");
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/get-admin-verbs/" + admin.getAccountKitId())
@@ -166,7 +168,6 @@ public class selectVerbsActivity extends AppCompatActivity {
                 }
                 // post data to web-server
 
-
                 client.newCall(request).enqueue(new Callback() {
 
                     @Override
@@ -206,6 +207,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                             });
 
                         }
+                        finish();
 
 
                     }
