@@ -61,6 +61,7 @@ public class VerbPackArrayAdapter extends ArrayAdapter<VerbPack> {
             }
         });
 
+
         // Return the completed view to render on screen
         return convertView;
     }

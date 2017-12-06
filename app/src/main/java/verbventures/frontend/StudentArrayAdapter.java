@@ -83,9 +83,21 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
             }
         });
 
+        cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox)view).isChecked()) {
+                    checked[position] = true;
+                }
+                else {
+                    checked[position] = false;
+                }
+            }
+        });
+
+
+
         // Return the completed view to render on screen
-
-
 
         return convertView;
     }
