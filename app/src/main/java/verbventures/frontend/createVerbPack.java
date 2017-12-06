@@ -44,16 +44,15 @@ public class createVerbPack extends AppCompatActivity {
 
         //get the passed in information
         admin = (Admin) getIntent().getSerializableExtra("admin");
-        try {
-            //if we were given a verb pack, populate the text box
-            verbPack = (VerbPack) getIntent().getSerializableExtra("verbPack");
+        verbPack = (VerbPack) getIntent().getSerializableExtra("verbPack");
+        if (verbPack != null) {
+            // if we recieved a verb pack, we are editing
             etVerbPack.setText(verbPack.getTitle());
             editFlag = true;
             btnCreateVerbPack.setText("Save Verb Pack");
-        } catch (Exception ex) {
-            //the verb pack is empty, so we don't need to populate
+        }
+        else {
             verbPack = new VerbPack();
-            editFlag = false;
         }
 
         btnCreateVerbPack.setOnClickListener(new View.OnClickListener() {

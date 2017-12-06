@@ -3,7 +3,6 @@ package verbventures.frontend;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,35 +11,26 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import verbventures.frontend.ModelClasses.Admin;
 import verbventures.frontend.ModelClasses.Verb;
 
 /**
- * Created by thetraff on 11/9/17.
+ * Created by thetraff on 12/5/17.
  */
 
-public class VerbArrayAdapter extends ArrayAdapter<Verb> {
-    // View lookup cache
+public class SelectVerbsArrayAdapter extends ArrayAdapter<Verb> {
+    //View lookup cache
     private static class ViewHolder {
         TextView verb;
-
     }
 
-    private static boolean checkBoxFlag;
-    public boolean[] checked;
+    public static boolean[] checked;
     private String[] verbsInPack;
 
-
-    public VerbArrayAdapter(Context context, Verb[] verbs) {
+    public SelectVerbsArrayAdapter(Context context, Verb[] verbs, String[] packVerbs) {
         super(context, R.layout.item_verb, verbs);
-    }
-
-    public VerbArrayAdapter(Context context, Verb[] verbs, String[] packVerbs) {
-        super(context, R.layout.item_verb, verbs);
-        checkBoxFlag = true;
         verbsInPack = packVerbs;
         checked = new boolean[verbs.length];
     }
@@ -52,10 +42,10 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
         //need a final var to use later
         final int position2 = position;
         // Check if an existing view is being reused, otherwise inflate the view
-        ViewHolder viewHolder; // view lookup cache stored in tag
+        SelectVerbsArrayAdapter.ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
             // If there's no view to re-use, inflate a brand new view for row
-            viewHolder = new ViewHolder();
+            viewHolder = new SelectVerbsArrayAdapter.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_verb, parent, false);
             viewHolder.verb = (TextView) convertView.findViewById(R.id.tvVerb);
@@ -64,7 +54,7 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
             convertView.setTag(viewHolder);
         } else {
             // View is being recycled, retrieve the viewHolder object from tag
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (SelectVerbsArrayAdapter.ViewHolder) convertView.getTag();
         }
         // Populate the data from the data object via the viewHolder object
         // into the template view.
@@ -74,14 +64,34 @@ public class VerbArrayAdapter extends ArrayAdapter<Verb> {
 
 
         Button editButton = convertView.findViewById(R.id.editButton);
-        editButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(v.getContext(), AddVerb.class);
-                intent.putExtra("admin", admin);
-                intent.putExtra("verb", verb);
-                v.getContext().startActivity(intent);
+        CheckBox cb = convertView.findViewById(R.id.checkBox);
+        cb.setVisibility(View.VISIBLE);
+        editButton.setVisibility(View.GONE);
+
+        //pre populate check boxes
+        if (verbsInPack != null && Arrays.asList(verbsInPack).contains(verb.getVerbId())) {
+            cb.setChecked(true);
+        }
+        if (cb.isChecked()) {
+            checked[position2] = true;
+        }
+
+        cb.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(((CheckBox)v).isChecked())
+                {
+                    checked[position2]=true;
+                }
+                else
+                {
+                    checked[position2]=false;
+
+                }
             }
         });
+
+
 
 
         // Return the completed view to render on screen

@@ -24,7 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -44,7 +46,7 @@ public class selectVerbsActivity extends AppCompatActivity {
      static Admin admin;
      static VerbPack verbPack;
      static boolean editFlag;
-     private VerbArrayAdapter adapter;
+     private SelectVerbsArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class selectVerbsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final String TAG = "debug";
+        final String TAG = "selectVerbsActivity";
 
         final Context mcontext = this;
         admin = (Admin) getIntent().getSerializableExtra("admin");
@@ -64,7 +66,7 @@ public class selectVerbsActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.lvVerbList);
         final Button btnFinish = (Button) findViewById(R.id.btnFinish);
 
-        if(editFlag) btnFinish.setText("Save Verb Pack");
+        if(editFlag) btnFinish.setText("Save Verbs");
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -89,14 +91,37 @@ public class selectVerbsActivity extends AppCompatActivity {
                 selectVerbsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new VerbArrayAdapter(mcontext, obtainedVerbs, verbPack.getVerbPackVerbs());
+                        adapter = new SelectVerbsArrayAdapter(mcontext, obtainedVerbs, verbPack.getVerbPackVerbs());
                         // Attach the adapter to a ListView
                         listView.setAdapter(adapter);
+                        //ArrayList<String> verbsInPack = new ArrayList<>(Arrays.asList(verbPack.getVerbPackVerbs()));
+
+                        //change the rendering of the views
+                        /*
+                        Log.d(TAG, "list count:" + listView.getCount() + "first visibe:" + listView.getFirstVisiblePosition() + "last visible:" + listView.getLastVisiblePosition());
+                        for (int i = 0; i < listView.getCount(); ++i) {
+                            Log.d(TAG, "in the list loop");
+                            View item = adapter.getView()
+                            Log.d(TAG, "list item:" + item.toString());
+                            Button editButton = (Button) item.findViewById(R.id.editButton);
+                            CheckBox cb = (CheckBox) item.findViewById(R.id.checkBox);
+                            editButton.setVisibility(View.INVISIBLE);
+                            cb.setText("include in verb pack");
+                            Verb verb = adapter.getItem(i);
+                            if (verbsInPack != null && Arrays.asList(verbsInPack).contains(verb.getVerbId())) {
+                                cb.setChecked(true);
+                            }
+                        }
+                        */
+
                     }
                 });
 
             }
         });
+
+
+
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,15 +134,42 @@ public class selectVerbsActivity extends AppCompatActivity {
                 Log.d(TAG, "Admin = " + accountKitId);
                 Log.d(TAG, "verbPack name:" + verbPack.getTitle());
 
-                for(int i=0; i < adapter.checked.length; i++){
-                    if(adapter.checked[i]){
+                for (int i = 0; i < adapter.checked.length; ++i) {
+                    if (adapter.checked[i]) {
                         verbsInPack.add(adapter.getItem(i).getVerbId());
                     }
                 }
 
+                /*
+                for (int i=0; i < adapter.getCount(); ++i) {
+                    View item = listView.getChildAt(i);
+                    CheckBox cb = (CheckBox) item.findViewById(R.id.checkBox);
+                    if (cb.isChecked()) {
+                         verbsInPack.add(adapter.getItem(i).getVerbId());
+                    }
+
+                }
+                */
+                //convert the ver pack array list to string array
+                String []packVerbs = verbsInPack.toArray(new String[verbsInPack.size()]);
+                for (String verbId : packVerbs) {
+                    Log.d(TAG,"verb in pack:" + verbId);
+                }
+                //Log.d(TAG, "verbs in pack:" + packVerbs.toString());
+
                 //create list with admin id in it
                 List<String> userVerbPacks = new ArrayList<>();
                 userVerbPacks.add(admin.getUser().getUserId());
+
+                verbPack.setVerbPackVerbs(packVerbs);
+
+                Intent intent = new Intent(selectVerbsActivity.this, selectStudentsActivity.class);
+                intent.putExtra("admin", admin);
+                intent.putExtra("verbPack",verbPack);
+                intent.putExtra("editFlag", editFlag);
+                startActivity(intent);
+                finish();
+                /*
 
                 //create JSONArrays for the data
                 JSONArray verbsInPackJSON = new JSONArray();
@@ -213,6 +265,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                     }
 
                 });
+                */
 
             }
         });
