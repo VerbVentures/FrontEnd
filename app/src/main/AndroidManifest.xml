@@ -92,14 +92,18 @@
         <activity
             android:name=".selectVerbsActivity"
             android:label="@string/title_activity_select_verbs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddVerb"
             android:label="AddVerb"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddAnimation"
             android:label="AddAnimation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".selectStudentsActivity"
+            android:label="@string/title_activity_select_students"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
