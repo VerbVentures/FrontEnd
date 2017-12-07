@@ -96,23 +96,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                         listView.setAdapter(adapter);
                         //ArrayList<String> verbsInPack = new ArrayList<>(Arrays.asList(verbPack.getVerbPackVerbs()));
 
-                        //change the rendering of the views
-                        /*
-                        Log.d(TAG, "list count:" + listView.getCount() + "first visibe:" + listView.getFirstVisiblePosition() + "last visible:" + listView.getLastVisiblePosition());
-                        for (int i = 0; i < listView.getCount(); ++i) {
-                            Log.d(TAG, "in the list loop");
-                            View item = adapter.getView()
-                            Log.d(TAG, "list item:" + item.toString());
-                            Button editButton = (Button) item.findViewById(R.id.editButton);
-                            CheckBox cb = (CheckBox) item.findViewById(R.id.checkBox);
-                            editButton.setVisibility(View.INVISIBLE);
-                            cb.setText("include in verb pack");
-                            Verb verb = adapter.getItem(i);
-                            if (verbsInPack != null && Arrays.asList(verbsInPack).contains(verb.getVerbId())) {
-                                cb.setChecked(true);
-                            }
-                        }
-                        */
+
 
                     }
                 });
@@ -140,16 +124,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                     }
                 }
 
-                /*
-                for (int i=0; i < adapter.getCount(); ++i) {
-                    View item = listView.getChildAt(i);
-                    CheckBox cb = (CheckBox) item.findViewById(R.id.checkBox);
-                    if (cb.isChecked()) {
-                         verbsInPack.add(adapter.getItem(i).getVerbId());
-                    }
 
-                }
-                */
                 //convert the ver pack array list to string array
                 String []packVerbs = verbsInPack.toArray(new String[verbsInPack.size()]);
                 for (String verbId : packVerbs) {
@@ -169,103 +144,7 @@ public class selectVerbsActivity extends AppCompatActivity {
                 intent.putExtra("editFlag", editFlag);
                 startActivity(intent);
                 finish();
-                /*
 
-                //create JSONArrays for the data
-                JSONArray verbsInPackJSON = new JSONArray();
-                JSONArray userVerbPacksJSON = new JSONArray();
-                for (String verbId: verbsInPack) {
-                    verbsInPackJSON.put(verbId);
-                }
-                for (String assignId : userVerbPacks) {
-                    userVerbPacksJSON.put(assignId);
-                }
-
-
-                // create json to post
-                JSONObject verbPackJSON = new JSONObject();
-                try {
-                    verbPackJSON.put("title", verbPack.getTitle());
-                    verbPackJSON.put("admin", verbPack.getAdmin());
-                    verbPackJSON.put("verbPackVerbs", verbsInPackJSON);
-                    verbPackJSON.put("userVerbPacks", userVerbPacksJSON);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d(TAG, "admin JSON object: " + verbPackJSON.toString());
-
-                OkHttpClient client = new OkHttpClient();
-                Request request;
-                if (editFlag) {
-                    //if we are editing a verb, we need to do a PUT
-                    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                    String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/" + verbPack.getVerbPackId() + '/';
-                    RequestBody body = RequestBody.create(JSON, verbPackJSON.toString());
-                    request = new Request.Builder()
-                            .url(url)
-                            .put(body)
-                            .addHeader("content-type", "application/json; charset=utf-8")
-                            .build();
-                } else {
-                    //if we are not editing, we only need to do a POST
-                    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                    String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/";
-                    RequestBody body = RequestBody.create(JSON, verbPackJSON.toString());
-                    request = new Request.Builder()
-                            .url(url)
-                            .post(body)
-                            .addHeader("content-type", "application/json; charset=utf-8")
-                            .build();
-                }
-                // post data to web-server
-
-                client.newCall(request).enqueue(new Callback() {
-
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("response", call.request().body().toString());
-                        Log.e(TAG, "API Error");
-                        Intent intent = new Intent(selectVerbsActivity.this, LoginError.class);
-                        intent.putExtra("admin", admin);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            String responseString = response.body().string();
-                            Log.d(TAG, responseString);
-                            Log.e(TAG, "API Error");
-                            Intent intent = new Intent(selectVerbsActivity.this, LoginError.class);
-                            intent.putExtra("admin", admin);
-                            startActivity(intent);
-                        }
-                        else {
-                            String responseString = response.body().string();
-                            Log.d(TAG, responseString);
-
-                            Gson gson = new Gson();
-                            final VerbPack verbPack;
-                            verbPack = gson.fromJson(responseString, VerbPack.class);
-                            Log.d("verbPack", verbPack.getTitle());
-
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),verbPack.getTitle() + " Created Successfully",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-                        }
-                        finish();
-
-
-                    }
-
-                });
-                */
 
             }
         });

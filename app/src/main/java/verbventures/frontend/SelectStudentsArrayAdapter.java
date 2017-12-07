@@ -64,7 +64,7 @@ public class SelectStudentsArrayAdapter extends ArrayAdapter<Student> {
         // Populate the data from the data object via the viewHolder object
         // into the template view.
         viewHolder.firstName.setText(student.getUser().getFirstName());
-        viewHolder.lastName.setText(student.getUser().getFirstName());
+        viewHolder.lastName.setText(student.getUser().getLastName());
 
 
         Button editButton = convertView.findViewById(R.id.editButton);

@@ -61,6 +61,10 @@ public class selectStudentsActivity extends AppCompatActivity {
         verbPack = (VerbPack) getIntent().getSerializableExtra("verbPack");
         editFlag = (boolean) getIntent().getBooleanExtra("editFlag", false);
 
+        if (verbPack == null) {
+            verbPack = new VerbPack();
+        }
+
         //get the views we need
         final ListView listView = (ListView) findViewById(R.id.lvStudentList);
         final Button btnFinish = (Button) findViewById(R.id.btnFinish);
@@ -99,20 +103,6 @@ public class selectStudentsActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        List<String> studentsInPack = new ArrayList<String>(Arrays.asList(verbPack.getUserVerbPacks()));
-        for (int i = 0; i < listView.getCount(); ++i) {
-            View item = listView.getChildAt(i);
-            Button editButton = item.findViewById(R.id.btnEdit);
-            CheckBox cb = item.findViewById(R.id.checkBox);
-            cb.setText("Assign verb pack");
-        Student student = adapter.getItem(i);
-            if (studentsInPack != null && Arrays.asList(studentsInPack).contains(student.getUser().getUserId())) {
-                cb.setChecked(true);
-            }
-            editButton.setVisibility(View.INVISIBLE);
-        }
-        */
 
 
 
@@ -131,15 +121,7 @@ public class selectStudentsActivity extends AppCompatActivity {
                         studentsInPack.add(adapter.getItem(i).getUser().getUserId());
                     }
                 }
-                /*
-                for (int i = 0; i < listView.getCount(); ++i) {
-                    View item = listView.getChildAt(i);
-                    CheckBox cb = item.findViewById(R.id.checkBox);
-                    if (cb.isChecked()) {
-                        studentsInPack.add(adapter.getItem(i).getUser().getUserId());
-                    }
-                }
-                */
+
 
                 Log.d(TAG, "Admin = " + accountKitId);
                 Log.d(TAG, "verbPack name:" + verbPack.getTitle());
@@ -248,100 +230,3 @@ public class selectStudentsActivity extends AppCompatActivity {
     }
 }
 
-/* put this in the right spot
-    //create JSONArrays for the data
-    JSONArray verbsInPackJSON = new JSONArray();
-    JSONArray userVerbPacksJSON = new JSONArray();
-                for (String verbId: verbsInPack) {
-                        verbsInPackJSON.put(verbId);
-                        }
-                        for (String assignId : userVerbPacks) {
-                        userVerbPacksJSON.put(assignId);
-                        }
-
-
-                        // create json to post
-                        JSONObject verbPackJSON = new JSONObject();
-                        try {
-                        verbPackJSON.put("title", verbPack.getTitle());
-                        verbPackJSON.put("admin", verbPack.getAdmin());
-                        verbPackJSON.put("verbPackVerbs", verbsInPackJSON);
-                        verbPackJSON.put("userVerbPacks", userVerbPacksJSON);
-                        } catch (JSONException e) {
-                        e.printStackTrace();
-                        }
-
-                        Log.d(TAG, "admin JSON object: " + verbPackJSON.toString());
-
-                        OkHttpClient client = new OkHttpClient();
-                        Request request;
-                        if (editFlag) {
-                        //if we are editing a verb, we need to do a PUT
-                        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                        String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/" + verbPack.getVerbPackId() + '/';
-                        RequestBody body = RequestBody.create(JSON, verbPackJSON.toString());
-                        request = new Request.Builder()
-                        .url(url)
-                        .put(body)
-                        .addHeader("content-type", "application/json; charset=utf-8")
-                        .build();
-                        } else {
-                        //if we are not editing, we only need to do a POST
-                        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                        String url = "http://verb-ventures-api-dev.us-east-1.elasticbeanstalk.com/api/verbpacks/";
-                        RequestBody body = RequestBody.create(JSON, verbPackJSON.toString());
-                        request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("content-type", "application/json; charset=utf-8")
-                        .build();
-                        }
-                        // post data to web-server
-
-                        client.newCall(request).enqueue(new Callback() {
-
-@Override
-public void onFailure(Call call, IOException e) {
-        Log.e("response", call.request().body().toString());
-        Log.e(TAG, "API Error");
-        Intent intent = new Intent(selectVerbsActivity.this, LoginError.class);
-        intent.putExtra("admin", admin);
-        startActivity(intent);
-        }
-
-@Override
-public void onResponse(Call call, Response response) throws IOException {
-        if (!response.isSuccessful()) {
-        String responseString = response.body().string();
-        Log.d(TAG, responseString);
-        Log.e(TAG, "API Error");
-        Intent intent = new Intent(selectVerbsActivity.this, LoginError.class);
-        intent.putExtra("admin", admin);
-        startActivity(intent);
-        }
-        else {
-        String responseString = response.body().string();
-        Log.d(TAG, responseString);
-
-        Gson gson = new Gson();
-final VerbPack verbPack;
-        verbPack = gson.fromJson(responseString, VerbPack.class);
-        Log.d("verbPack", verbPack.getTitle());
-
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-
-@Override
-public void run() {
-        Toast.makeText(getApplicationContext(),verbPack.getTitle() + " Created Successfully",Toast.LENGTH_SHORT).show();
-        }
-        });
-
-        }
-        finish();
-
-
-        }
-
-        });
-
-        */
