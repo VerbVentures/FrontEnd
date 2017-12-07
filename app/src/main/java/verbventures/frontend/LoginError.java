@@ -15,6 +15,7 @@ public class LoginError extends AppCompatActivity {
         setContentView(R.layout.activity_login_error);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("API Error");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

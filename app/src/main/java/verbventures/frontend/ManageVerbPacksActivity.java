@@ -45,6 +45,7 @@ public class ManageVerbPacksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_verb_packs);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
+        setTitle("Manage Verb Packs");
 
 
         final Context mcontext = this;
@@ -119,12 +120,6 @@ public class ManageVerbPacksActivity extends AppCompatActivity {
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
                 manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_sessionreports:
-                Intent sessionReports = new Intent(this, SessionReportsActivity.class);
-                sessionReports.putExtra("admin", admin);
-                startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:

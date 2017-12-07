@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -69,6 +70,7 @@ public class LearnSession extends AppCompatActivity {
         setContentView(R.layout.activity_learn_session);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
+        getSupportActionBar().hide();
 
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
@@ -89,6 +91,23 @@ public class LearnSession extends AppCompatActivity {
                 }
             }
         });
+
+        final Button btn_exit = findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        final TextView tv_verb = findViewById(R.id.verb_text_view);
+        tv_verb.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                speak(tv_verb.getText().toString());
+            }
+        });
+
 
         final Context mcontext = this;
         admin = (Admin) getIntent().getSerializableExtra("admin");
@@ -327,42 +346,11 @@ public class LearnSession extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_manageverbs:
-                Intent manageVerbs = new Intent(this, ManageVerbsActivity.class);
-                manageVerbs.putExtra("admin", admin);
-                startActivity(manageVerbs);
-                return true;
+    protected void onDestroy()
+    {
+        super.onDestroy();
 
-            case R.id.action_manageverbpacks:
-                Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
-                manageVerbPacks.putExtra("admin", admin);
-                startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_sessionreports:
-                Intent sessionReports = new Intent(this, SessionReportsActivity.class);
-                sessionReports.putExtra("admin", admin);
-                startActivity(sessionReports);
-                return true;
-
-            case R.id.action_managestudents:
-                Intent manageStudents = new Intent(this, ManageStudentsActivity.class);
-                manageStudents.putExtra("admin", admin);
-                startActivity(manageStudents);
-                return true;
-
-            case R.id.action_signout:
-                Intent logout = new Intent(this, MainActivity.class);
-                logout.putExtra("signout", true);
-                startActivity(logout);
-                return true;
-
-            default:
-                // if we get here, the user's action wasn't recognized
-                // invoke superclass to handle it
-                return super.onOptionsItemSelected(item);
-        }
+        tts.shutdown();
     }
+
 }

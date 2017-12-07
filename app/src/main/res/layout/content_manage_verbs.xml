@@ -9,17 +9,16 @@
     tools:showIn="@layout/activity_manage_verbs">
 
     <ListView
-            android:id="@+id/verb_list"
-            android:layout_width="440dp"
-            android:layout_height="758dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginTop="45dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="10.0sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/addVerbButton"
-            app:layout_constraintTop_toTopOf="parent">
-        </ListView>
+        android:id="@+id/verb_list"
+        android:layout_width="440dp"
+        android:layout_height="759dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginTop="45dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addVerbButton"
+        app:layout_constraintTop_toTopOf="parent"></ListView>
 
     <Button
         android:id="@+id/addVerbButton"

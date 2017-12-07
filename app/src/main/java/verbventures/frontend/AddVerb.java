@@ -55,6 +55,7 @@ public class AddVerb extends AppCompatActivity {
         setContentView(R.layout.activity_add_verb);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Create Verb");
 
         admin = (Admin) getIntent().getSerializableExtra("admin");
         verb = (Verb) getIntent().getSerializableExtra("verb");
@@ -252,12 +253,6 @@ public class AddVerb extends AppCompatActivity {
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
                 manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_sessionreports:
-                Intent sessionReports = new Intent(this, SessionReportsActivity.class);
-                sessionReports.putExtra("admin", admin);
-                startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:

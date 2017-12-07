@@ -54,6 +54,7 @@ public class selectVerbsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_verbs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Select Verbs");
 
         final String TAG = "selectVerbsActivity";
 

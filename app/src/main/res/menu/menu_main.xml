@@ -1,8 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="Settings"
-        android:orderInCategory="100" app:showAsAction="never" />
     <item
         android:id="@+id/action_manageverbs"
         android:title="Manage Verbs"
@@ -10,10 +8,6 @@
     <item
         android:id="@+id/action_manageverbpacks"
         android:title="Manage Verb Packs"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_sessionreports"
-        android:title="Session Reports"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_managestudents"

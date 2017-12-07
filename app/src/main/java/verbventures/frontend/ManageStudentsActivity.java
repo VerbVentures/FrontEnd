@@ -42,6 +42,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_students);
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
+        setTitle("Manage Students");
 
         final Context mcontext = this;
         admin = (Admin) getIntent().getSerializableExtra("admin");
@@ -123,12 +124,6 @@ public class ManageStudentsActivity extends AppCompatActivity {
                 Intent manageVerbPacks = new Intent(this, ManageVerbPacksActivity.class);
                 manageVerbPacks.putExtra("admin", admin);
                 startActivity(manageVerbPacks);
-                return true;
-
-            case R.id.action_sessionreports:
-                Intent sessionReports = new Intent(this, SessionReportsActivity.class);
-                sessionReports.putExtra("admin", admin);
-                startActivity(sessionReports);
                 return true;
 
             case R.id.action_managestudents:

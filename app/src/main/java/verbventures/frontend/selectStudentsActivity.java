@@ -53,6 +53,7 @@ public class selectStudentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Select Students");
 
         final String TAG = "debug";
 
