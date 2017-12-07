@@ -116,6 +116,7 @@ public class selectStudentsActivity extends AppCompatActivity {
                 String accountKitId = admin.getAccountKitId();
                 String[] verbsInPack = verbPack.getVerbPackVerbs();
                 List<String> studentsInPack = new ArrayList<>();
+                studentsInPack.add(admin.getUser().getUserId());
 
                 for (int i = 0; i < adapter.checked.length; ++i) {
                     if (adapter.checked[i]) {
